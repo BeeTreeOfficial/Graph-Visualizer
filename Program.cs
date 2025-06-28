@@ -11,7 +11,7 @@ public partial class Program
     public static void Main()
     {
         FlyingCamera camera = new(new(0,0), 1, 1);
-        Raylib.InitWindow(1000, 1000, "LOL");
+        Raylib.InitWindow(800, 800, "LOL");
         Graph graph = new();
         graph.AddToPoints(new("A"));
         graph.AddToPoints(new("B"));
@@ -19,15 +19,15 @@ public partial class Program
         graph.AddToPoints(new("D"));
         graph.AddToPoints(new("E"));
         graph.AddToPoints(new("X"));
-        graph.AddConnection("A", 1, "B");
-        graph.AddConnection("B", 2, "C");
-        graph.AddConnection("B", 2, "D");
-        graph.AddConnection("B", 7, "E");
-        graph.AddConnection("C", 3, "E");
-        graph.AddConnection("D", 4, "E");
-        graph.AddOneWayConnection("X", 2, "C");
-        graph.AddOneWayConnection("X", 9, "E");
-        graph.AddOneWayConnection("X", 10, "A");
+        graph.AddConnection("A", "B");
+        graph.AddConnection("B", "C");
+        graph.AddConnection("B", "D");
+        graph.AddConnection("B", "E");
+        graph.AddConnection("C", "E");
+        graph.AddConnection("D", "E");
+        graph.AddConnection("X", "C");
+        graph.AddConnection("X", "E");
+        graph.AddConnection("X", "A");
 
         graph.Print();
         Dictionary<string, double> dict = graph.SolveDijkstra("A");
@@ -35,6 +35,10 @@ public partial class Program
 
         while (!Raylib.WindowShouldClose()) {
             camera.Update();
+            if (Raylib.IsKeyPressed(KeyboardKey.R)) {
+                graph.Shuffle();
+                Print(graph.SolveDijkstra("A"));
+            }
             Raylib.BeginDrawing();
             Raylib.ClearBackground(Color.White);
             Raylib.BeginMode2D(camera.GetBody());
@@ -50,7 +54,7 @@ public partial class Program
         foreach (var item in points)
         {
             Console.WriteLine("___________________________________________________ \n");
-            Console.Write($"The Point is Named: {item.Key} || Shortest Distance Is: {item.Value}\n");
+            Console.Write($"The Point is Named: {item.Key} || Shortest Distance Is: {Math.Floor(item.Value)}\n");
             Console.WriteLine();
         }
         Console.WriteLine("___________________________________________________ \n");

@@ -1,4 +1,6 @@
-﻿namespace DijkstraAlgorithm;
+﻿using System.Numerics;
+
+namespace DijkstraAlgorithm;
 
 public class Graph
 {
@@ -31,24 +33,36 @@ public class Graph
     {
         foreach (var item in points)
         {
-            item.Value.Draw();
+            item.Value.DrawLines();
+        }
+        foreach (var item in points)
+        {
+            item.Value.DrawPoints();
         }
     }
 
-    public void AddConnection(string from, double Distance, string to)
+    public void AddConnection(string from, string to)
     {
-        points[from].AddNeighbor(Distance, points[to]);
+        points[from].AddNeighbor(points[to]);
     }
 
-    public void AddOneWayConnection(string from, double Distance, string to)
+    public void AddOneWayConnection(string from, string to)
     {
-        points[from].AddNeighbor(Distance, points[to], true);
+        points[from].AddNeighbor(points[to], true);
     }
 
     public Dictionary<string, double> SolveDijkstra(string Name)
     {
         ShortestPathSolver Solver = new(points, Name);
         return Solver.Solve();
+    }
+
+    public void Shuffle()
+    {
+        foreach (var item in points)
+        {
+            item.Value.Shuffle();
+        }
     }
 }
 
