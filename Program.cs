@@ -22,13 +22,8 @@ public partial class Program
         graph.AddConnection("A", "B");
         graph.AddConnection("B", "C");
         graph.AddConnection("B", "D");
-        graph.AddConnection("B", "E");
-        graph.AddConnection("C", "E");
-        graph.AddConnection("D", "E");
-        graph.AddConnection("X", "C");
-        graph.AddConnection("X", "E");
+        graph.AddConnection("A", "E");
         graph.AddConnection("X", "A");
-
         graph.Print();
         Dictionary<string, double> dict = graph.SolveDijkstra("A");
         Print(dict);
