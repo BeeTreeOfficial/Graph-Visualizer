@@ -1,12 +1,10 @@
-﻿
+﻿namespace DijkstraAlgorithm;
 
-namespace DijkstraAlgorithm;
-
-public class ShortestPathSolver(Dictionary<string, Point> Points, string Name)
+public class ShortestPathSolver(Graph graph, string Name)
 {
     private HashSet<string> Visited = [];
     private Dictionary<string, double> Sheet = [];
-    private readonly Dictionary<string, Point> points = Points;
+    private readonly Dictionary<string, Point> points = graph.points;
     private readonly string StartPointName = Name;
     public Dictionary<string, double> Solve()
     {

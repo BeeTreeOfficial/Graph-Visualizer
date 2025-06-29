@@ -1,4 +1,6 @@
 ﻿
+using System.Numerics;
+
 namespace DijkstraAlgorithm;
 public class Graph
 {
@@ -11,21 +13,26 @@ public class Graph
         Console.WriteLine(WritingConstants.HugeDash);
         foreach (var item in points)
         {
-            Console.WriteLine("___________________________________________________ \n");
+            Console.WriteLine(WritingConstants.UnderDash);
             Console.Write($"The Point is Named: {item.Key} || Contains Links To: \n");
             foreach (var point in item.Value.ConnectedEdges)
             {
-                Console.Write($"\n    {point.Key} - with distance: {point.Value.Length}; ");
+                Console.Write($"\n" +
+                    $"    " +
+                    $"{point.Key} - with distance: {(int)point.Value.Length}; ");
             }
             Console.WriteLine();
         }
-        Console.WriteLine("___________________________________________________ \n");
+        Console.WriteLine(WritingConstants.UnderDash);
         Console.WriteLine(WritingConstants.HugeDash);
     }
 
     public void CreateConnection(string from, string to, bool OneWay = false)
     {
-        if (DoesThisKindOfConnectionExist(from, to) || from == to) return;
+        if (!points.ContainsKey(from) || !points.ContainsKey(to) || DoesThisKindOfConnectionExist(from, to) || from == to)
+        {
+            return;
+        }
         Edge edge = new(points[from], points[to]);
 
         edges.Add((from, to), edge);
@@ -33,7 +40,7 @@ public class Graph
         if (OneWay) return;
         points[to].LinkToEdge(edge);
     }
-    
+
 
     public void AddToPoints(Point point)
     {
@@ -46,6 +53,30 @@ public class Graph
         points.Add(point.Name, point);
     }
 
+
+    public void RemovePoint(string PointName)
+    {
+        if (!points.ContainsKey(PointName)) { return; }
+        Point PointToDelete = points[PointName];
+        foreach (var item in PointToDelete.ConnectedEdges)
+        {
+            RemoveEdge(item.Value);
+        }
+        points.Remove(PointName);
+    }
+
+    public void RemoveEdge(Edge EdgeToRemove)
+    {
+        EdgeToRemove.DetachFromBothPoints();
+        if (edges.ContainsKey((EdgeToRemove.Left.Name, EdgeToRemove.Right.Name)))
+        {
+            edges.Remove((EdgeToRemove.Left.Name, EdgeToRemove.Right.Name));
+        }
+        else if (edges.ContainsKey((EdgeToRemove.Right.Name, EdgeToRemove.Left.Name)))
+        {
+            edges.Remove((EdgeToRemove.Right.Name, EdgeToRemove.Left.Name));
+        }
+    }
     public void Draw()
     {
         foreach (var item in edges)
@@ -81,7 +112,7 @@ public class Graph
 
     public Dictionary<string, double> SolveDijkstra(string Name)
     {
-        ShortestPathSolver Solver = new(points, Name);
+        ShortestPathSolver Solver = new(this, Name);
         return Solver.Solve();
     }
 
