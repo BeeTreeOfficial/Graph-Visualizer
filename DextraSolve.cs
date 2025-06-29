@@ -1,14 +1,22 @@
 ﻿namespace DijkstraAlgorithm;
 
-public class ShortestPathSolver(Graph graph, string Name)
+struct ResultData
+{
+    double Price;
+    string PreviousOne;
+}
+public class DextraSolve(Graph graph)
 {
     private HashSet<string> Visited = [];
     private Dictionary<string, double> Sheet = [];
     private readonly Dictionary<string, Point> points = graph.points;
-    private readonly string StartPointName = Name;
-    public Dictionary<string, double> Solve()
+    public Dictionary<string, double> Solve(string StartPointName)
     {
-        InitializeSheet();
+        if (!points.ContainsKey(StartPointName))
+        {
+            throw new IndexOutOfRangeException($"{StartPointName} Does not exist in this graph");
+        }
+        InitializeSheet(StartPointName);
         for (int i = 0; i < points.Count; i++)
         {
             if (Visited.Count == points.Count){break;}
@@ -38,13 +46,14 @@ public class ShortestPathSolver(Graph graph, string Name)
             if (point.Value < MinDistance && !Visited.Contains(point.Key))
             {
                 MinDistance = point.Value;
+                
                 CurrentPoint = points[point.Key];
             }
         }
         return CurrentPoint;
     }
 
-    private void InitializeSheet()
+    private void InitializeSheet(string StartPointName)
     {
         foreach (var item in points)
         {

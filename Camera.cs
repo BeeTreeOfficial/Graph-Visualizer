@@ -31,11 +31,11 @@ abstract public class BaseCamera
         return CameraBody;
     }
 }
+
 public class FlyingCamera(Vector2 Target, float Zoom, int MaxSpeed) : BaseCamera(new(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2), Target, Zoom)
 {
     private readonly int MaxSpeed = MaxSpeed * 1000;
     Vector2 Velocity = new(0, 0);
-    private const float slowingDownMultiplayer = 20f;
 
     public void Increase(float zoom)
     {

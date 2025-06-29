@@ -35,8 +35,7 @@ public class Edge(Point Left, Point Right)
         {
             return Left;
         }
-        Console.WriteLine("How the fuck did you get There?");
-        return Left;
+        throw new ArgumentException("Point is not part of this edge");
     }
 
     public float Length { get { return Math.Abs(Vector2.Distance(Right.Position, Left.Position)); } }

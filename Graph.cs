@@ -90,7 +90,7 @@ public class Graph
     }
     private bool DoesThisKindOfConnectionExist(string first, string second)
     {
-        if (edges.ContainsKey((first, second)) || edges.ContainsKey((first, second)))
+        if (edges.ContainsKey((first, second)) || edges.ContainsKey((second, first)))
         {
             Console.WriteLine("This Connection Already Exists");
             return true;
@@ -108,12 +108,6 @@ public class Graph
             (int, int) Numbers = (Program.random.Next(points.Count), Program.random.Next(points.Count));
             CreateConnection(Names[Numbers.Item1], Names[Numbers.Item2]);
         }
-    }
-
-    public Dictionary<string, double> SolveDijkstra(string Name)
-    {
-        ShortestPathSolver Solver = new(this, Name);
-        return Solver.Solve();
     }
 
     public void Shuffle()

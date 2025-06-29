@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using System.Xml.Linq;
 
 
 namespace DijkstraAlgorithm;
@@ -80,7 +81,20 @@ public class Program
                     break;
             }
         }
-        buffer = "";
+        else if (commands.Contains("DEX"))
+        {
+            DextraSolve DextraSolver = new(graph);
+            try
+            {
+                Print(DextraSolver.Solve(commands[1]));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
+        }
+            buffer = "";
 
     }
     private static void TypingCheck(KeyboardKey pressedKey, ref string buffer)
