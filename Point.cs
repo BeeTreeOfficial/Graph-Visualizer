@@ -3,72 +3,29 @@ using System.Numerics;
 
 namespace DijkstraAlgorithm;
 
-
-
-
-public class Point
+public class Point(string Name)
 {
-    public Vector2 Position;
+    public Vector2 Position = new(Program.random.Next(1000), Program.random.Next(1000));
 
     public void Shuffle()
     {
         Position = new(Program.random.Next(1000), Program.random.Next(1000));
-        RecalculateDistances();
     }
-    public void DrawLines()
-    {
-        
-        foreach (var item in Edges)
-        {
-            Raylib.DrawLine((int)Position.X, (int)Position.Y, (int)item.Value.EndPoint.Position.X, (int)item.Value.EndPoint.Position.Y, Color.Red);
-        }
-    }
-    public void DrawPoints()
+
+    public void Draw()
     {
         Raylib.DrawCircle((int)Position.X, (int)Position.Y, 10, Color.White);
         Raylib.DrawCircleLines((int)Position.X, (int)Position.Y, 10, Color.Red);
         Raylib.DrawText(Name, (int)(Position.X - 4), (int)(Position.Y - 4.5), 13, Color.Black);
     }
 
-    public Dictionary<string, Edge> Edges;
-    public string Name = "UNNAMED";
+    public Dictionary<string, Edge> ConnectedEdges = [];
+    public string Name = Name;
 
-    public Point(string Name)
+    public void LinkToEdge(Edge edge)
     {
-        this.Name = Name;
-        Position = new(Program.random.Next(1000), Program.random.Next(1000));
-        this.Edges = [];
-    }
-    private void RecalculateDistances()
-    {
-        foreach (var item in Edges)
-        {
-            item.Value.Distance = CalculateDistance(item.Value.EndPoint);
-        }
-    }
-    private float CalculateDistance(Point point)
-    {
-        return Math.Abs(Vector2.Distance(Position, point.Position));
-    }
-    public void AddNeighbor(Point point, bool OneWay = false)
-    {
-        Edge NewEdge = new(CalculateDistance(point), point);
-        if (Edges.ContainsKey(NewEdge.EndPoint.Name))
-        {
-            return;
-        }
-        Edges.Add(NewEdge.EndPoint.Name, NewEdge);
-        if (OneWay)
-        {
-            return;
-        }
-        NewEdge.EndPoint.AddNeighbor(this);
+        if (ConnectedEdges.ContainsKey(edge.GetPointOppositeTo(this).Name)) { Console.WriteLine("ERROR, TRIED TO ADD EXISTING KEY"); return; }
+        ConnectedEdges.Add(edge.GetPointOppositeTo(this).Name, edge);
     }
 
-}
-
-public class Edge(double Distance, Point EndPoint)
-{
-    public double Distance = Distance;
-    public Point EndPoint = EndPoint;
 }

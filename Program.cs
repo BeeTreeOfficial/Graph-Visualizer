@@ -19,19 +19,12 @@ public partial class Program
         graph.AddToPoints(new("D"));
         graph.AddToPoints(new("E"));
         graph.AddToPoints(new("X"));
-        graph.AddConnection("A", "B");
-        graph.AddConnection("B", "C");
-        graph.AddConnection("B", "D");
-        graph.AddConnection("A", "E");
-        graph.AddConnection("X", "A");
-        graph.Print();
-        Dictionary<string, double> dict = graph.SolveDijkstra("A");
-        Print(dict);
 
         while (!Raylib.WindowShouldClose()) {
             camera.Update();
             if (Raylib.IsKeyPressed(KeyboardKey.R)) {
-                graph.Shuffle();
+                string answer = Console.ReadLine();
+                graph.CreateConnection(answer[0].ToString(), answer[1].ToString());
                 Print(graph.SolveDijkstra("A"));
             }
             Raylib.BeginDrawing();
@@ -45,15 +38,14 @@ public partial class Program
 
     public static void Print(Dictionary<string, double> points)
     {
-        Console.WriteLine("The Problem Is Solved Successfully:\n------------------------------------------------------------------------------------------------");
+        Console.WriteLine($"The Problem Is Solved Successfully:\n{WritingConstants.HugeDash};");
         foreach (var item in points)
         {
-            Console.WriteLine("___________________________________________________ \n");
+            Console.WriteLine(WritingConstants.UnderDash);
             Console.Write($"The Point is Named: {item.Key} || Shortest Distance Is: {Math.Floor(item.Value)}\n");
             Console.WriteLine();
         }
-        Console.WriteLine("___________________________________________________ \n");
-        Console.WriteLine("------------------------------------------------------------------------------------------------");
+        Console.WriteLine(WritingConstants.HugeDash); ;
     }
 
 }
