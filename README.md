@@ -37,7 +37,7 @@ A real-time, interactive graph editor and pathfinding visualization tool built w
   - [ ] Invalid file / schema handling  
 
 
-## Screenshot
+## Demo
 
 ![Demo Screenshot](./screenshots/output.gif)
 
