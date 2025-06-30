@@ -49,8 +49,9 @@ When the application launches, you’ll see a blank canvas. Toggle typing mode w
 
 - `ADD <name>`  
   Create a new vertex at the current camera focus with the given name.  
-- `ADD <name> <label>`  
-  Create a vertex and display a custom label.
+- `ADD <name> <color>` 
+  RED,  GREEN, BLACK, BLUE, YELLOW;
+  Create a vertex and display a custom color.
 
 - `DEL <name>`  
   Remove the vertex (and all its edges).
