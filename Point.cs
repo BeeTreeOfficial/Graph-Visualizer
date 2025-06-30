@@ -7,6 +7,10 @@ namespace DijkstraAlgorithm;
 
 public class Point
 {
+    public void DrawHighlight()
+    {
+        Raylib.DrawCircleLines((int)position.X, (int)position.Y, 15, color);
+    }
     public static readonly Dictionary<string, Color> ColorsConst = new()
     {
         ["RED"] = Color.Red,
@@ -16,18 +20,20 @@ public class Point
         ["YELLOW"] = Color.Yellow,
     };
 
-    public Vector2 Position = Vector2.Zero;
+    public Vector2 position = Vector2.Zero;
     public Color color = Color.Red;
+
+    public Vector2 Position { get { return position; } }
 
     public void Shuffle()
     {
-        Position = new(Program.random.Next(1000), Program.random.Next(1000));
+        position = new(Program.random.Next(1000), Program.random.Next(1000));
     }
 
     public void Draw()
     {
-        Raylib.DrawCircle((int)Position.X, (int)Position.Y, 6, color);
-        Raylib.DrawText(Name, (int)(Position.X + 20), (int)(Position.Y - 30), 23, Color.Black);
+        Raylib.DrawCircle((int)position.X, (int)position.Y, 6, color);
+        Raylib.DrawText(Name, (int)(position.X + 20), (int)(position.Y - 30), 23, Color.Black);
     }
 
     public Dictionary<string, Edge> ConnectedEdges = [];
@@ -39,13 +45,35 @@ public class Point
     }
     public Point(string Name, Vector2 Position)
     {
+        this.color = ColorsConst.ElementAt(Program.random.Next(ColorsConst.Count)).Value;
         this.Name = Name;
-        this.Position = Position;
+        this.position = Position;
+    }
+
+    public Point(Vector2 Position, Color color, Dictionary<string, Edge> ConnectedEdges, string Name)
+    {
+        this.position = Position;
+        this.Name = Name;
+        this.color = color;
+        this.ConnectedEdges = ConnectedEdges ?? new Dictionary<string, Edge>();
+    }
+
+    public void Update()
+    {
+        Vector2 Direction = Vector2.Zero;
+        Direction.X = Raylib.IsKeyDown(KeyboardKey.Right) - Raylib.IsKeyDown(KeyboardKey.Left);
+        Direction.Y = Raylib.IsKeyDown(KeyboardKey.Down) - Raylib.IsKeyDown(KeyboardKey.Up);
+        position += Direction * 100 * Raylib.GetFrameTime();
+    }
+
+    public void Move(Vector2 Velocity)
+    {
+        position += Velocity;
     }
 
     public Point(string name, Vector2 position, string ColorToUse)
     {
-        Position = position;
+        this.position = position;
         if (ColorsConst.TryGetValue(ColorToUse, out Color value)) color = value;
         else color = Color.Red;
         Name = name;

@@ -1,5 +1,5 @@
-﻿
-using System.Numerics;
+﻿using System.Numerics;
+using System.Text.Json.Serialization;
 
 namespace DijkstraAlgorithm;
 public class Graph
@@ -7,6 +7,21 @@ public class Graph
     public Dictionary<string, Point> points = [];
     public Dictionary<(string, string), Edge> edges = [];
 
+    public Dictionary<string, Point> Points {  get { return points; } }
+    public Point? GetPoint(string PointName)
+    {
+        if (points.ContainsKey(PointName))
+        {
+            return points[PointName];
+        }
+        return null;
+    }
+    public Graph() { }
+    public Graph(Dictionary<string, Point> points, Dictionary<(string, string), Edge> edges)
+    {
+        this.points = points;
+        this.edges = edges;
+    }
 
     public void Print()
     {
@@ -65,7 +80,7 @@ public class Graph
         points.Remove(PointName);
     }
 
-    public void RemoveEdge(Edge EdgeToRemove)
+    private void RemoveEdge(Edge EdgeToRemove)
     {
         EdgeToRemove.DetachFromBothPoints();
         if (edges.ContainsKey((EdgeToRemove.Left.Name, EdgeToRemove.Right.Name)))
@@ -77,6 +92,20 @@ public class Graph
             edges.Remove((EdgeToRemove.Right.Name, EdgeToRemove.Left.Name));
         }
     }
+
+    public void RemoveEdgeByName(string first, string second)
+    {
+        if (edges.ContainsKey((first, second)))
+        {
+            RemoveEdge(edges[(first, second)]);
+        }
+        else if (edges.ContainsKey((second, first)))
+        {
+            RemoveEdge(edges[(second, first)]);
+        }
+    }
+
+
     public void Draw()
     {
         foreach (var item in edges)
@@ -118,5 +147,4 @@ public class Graph
         }
     }
 }
-
 
