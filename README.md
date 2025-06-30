@@ -20,7 +20,6 @@ A real-time, interactive graph editor and pathfinding visualization tool built w
 
 ![Demo Screenshot](./screenshots/output.gif)
 
-*(Replace with your own screenshot!)*
 
 ## Requirements
 
