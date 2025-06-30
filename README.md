@@ -16,6 +16,27 @@ A real-time, interactive graph editor and pathfinding visualization tool built w
 - Random graph generation and shuffling
 - Optional fullscreen toggle and FPS display
 
+- ## 1. Negative‐Cycle Check (Bellman–Ford)
+- [ ] Define data structures for **nodes** and **edges**  
+- [ ] Implement `bellman_ford(nodes, edges, source)`  
+  - Relax edges |V|–1 times  
+  - Perform one more pass to detect negative cycles  
+- [ ] Write unit tests:
+  - [ ] Graph with all non‐negative weights  
+  - [ ] Graph containing a known negative cycle  
+- [ ] Add logging / verbose flag to trace relaxations  
+
+## 2. Graph Serialization (Save / Load)
+- [ ] Choose serialization format (e.g. JSON, YAML, pickle)  
+- [ ] Implement `save_graph(path, nodes, edges)`  
+  - Dump nodes + edges to file  
+- [ ] Implement `load_graph(path)`  
+  - Read file and reconstruct graph data structures  
+- [ ] Write unit tests:
+  - [ ] Round-trip consistency (save → load → save)  
+  - [ ] Invalid file / schema handling  
+
+
 ## Screenshot
 
 ![Demo Screenshot](./screenshots/output.gif)
