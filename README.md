@@ -39,7 +39,7 @@ A real-time, interactive graph editor and pathfinding visualization tool built w
 
 ## Demo
 
-![Demo Screenshot](./screenshots/output.gif)
+![Demo Screenshot](./RepoRelated/TimeLapse.gif)
 
 
 ## Requirements
@@ -107,18 +107,10 @@ When the application launches, you’ll see a blank canvas. Toggle typing mode w
   Solve single-source shortest paths with **Bellman–Ford**.  
   Outputs distances and paths; detects negative cycles.
 
-### File I/O
-
-- `SAVE <filename>`  
-  Save the current graph to disk as `<filename>.json`.
-
-- `LOAD <filename>`  
-  Load a previously saved graph from disk.
-
 ### Camera & View
 
-- Pan: Click-and-drag the background  
-- Zoom: Mouse wheel  
+- Pan: W A S D 
+- Zoom: Q / E 
 - Fullscreen Toggle: Press `F`
 
 ### Miscellaneous
@@ -126,15 +118,6 @@ When the application launches, you’ll see a blank canvas. Toggle typing mode w
 - `P` (when not typing): Print graph data to console  
 - `ESC` or close window: Exit application  
 - FPS counter in the top-left corner  
-
-## Code Overview
-
-- **Program.cs**: Main loop, input handling, rendering, and command dispatcher  
-- **Graph.cs**: Data model for vertices and edges, plus drawing routines  
-- **DijkstraSolve.cs**: Implements Dijkstra’s algorithm  
-- **BellFord.cs**: Implements Bellman–Ford algorithm  
-- **GraphManager.cs**: Save/load functionality (JSON serialization)  
-- **FlyingCamera.cs**: 2D pan-and-zoom camera controlled by mouse/wheel  
 
 ## Contributing
 
