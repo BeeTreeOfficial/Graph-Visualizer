@@ -1,10 +1,8 @@
 ﻿using Raylib_cs;
-
+using DijkstraAlgorithm.GraphRelated.Edges;
 using System.Numerics;
 
-namespace DijkstraAlgorithm;
-
-
+namespace DijkstraAlgorithm.GraphRelated.Points;
 public class Point
 {
     public void DrawHighlight()
@@ -45,17 +43,17 @@ public class Point
     }
     public Point(string Name, Vector2 Position)
     {
-        this.color = ColorsConst.ElementAt(Program.random.Next(ColorsConst.Count)).Value;
+        color = ColorsConst.ElementAt(Program.random.Next(ColorsConst.Count)).Value;
         this.Name = Name;
-        this.position = Position;
+        position = Position;
     }
 
     public Point(Vector2 Position, Color color, Dictionary<string, Edge> ConnectedEdges, string Name)
     {
-        this.position = Position;
+        position = Position;
         this.Name = Name;
         this.color = color;
-        this.ConnectedEdges = ConnectedEdges ?? new Dictionary<string, Edge>();
+        this.ConnectedEdges = ConnectedEdges ?? [];
     }
 
     public void Update()

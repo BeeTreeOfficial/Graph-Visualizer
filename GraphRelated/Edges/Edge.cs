@@ -1,7 +1,8 @@
 ﻿using Raylib_cs;
+using DijkstraAlgorithm.GraphRelated.Points;
 using System.Numerics;
 
-namespace DijkstraAlgorithm;
+namespace DijkstraAlgorithm.GraphRelated.Edges;
 
 public class Edge(Point Left, Point Right)
 {
@@ -34,8 +35,8 @@ public class Edge(Point Left, Point Right)
 
     public Point GetPointOppositeTo(Point CurrentPoint)
     {
-        bool IsLeft = (Left == CurrentPoint);
-        bool IsRight = (Right == CurrentPoint);
+        bool IsLeft = Left == CurrentPoint;
+        bool IsRight = Right == CurrentPoint;
         if (IsLeft)
         {
             return Right;

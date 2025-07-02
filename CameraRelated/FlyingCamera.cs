@@ -1,36 +1,7 @@
 ﻿using Raylib_cs;
 using System.Numerics;
 
-namespace DijkstraAlgorithm;
-
-abstract public class BaseCamera
-{
-    protected Camera2D CameraBody;
-
-    public BaseCamera(Vector2 Offset, Vector2 Target, float Zoom)
-    {
-        CameraBody = new Camera2D
-        {
-            Offset = Offset,
-            Target = Target,
-            Rotation = 0,
-            Zoom = Zoom
-        };
-    }
-
-    public bool IsVisible(Rectangle rectangle)
-    {
-        return (!(Math.Abs(Raymath.Vector2Distance(CameraBody.Target, rectangle.Position)) > Raylib.GetScreenWidth() / 0.9));
-    }
-
-    public abstract void Update();
-
-
-    public Camera2D GetBody()
-    {
-        return CameraBody;
-    }
-}
+namespace DijkstraAlgorithm.CameraRelated;
 
 public class FlyingCamera(Vector2 Target, float Zoom, int MaxSpeed) : BaseCamera(new(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2), Target, Zoom)
 {
@@ -51,7 +22,7 @@ public class FlyingCamera(Vector2 Target, float Zoom, int MaxSpeed) : BaseCamera
     private void CalculateVelocity()
     {
         Vector2 Direction = GetMovementInput();
-        Velocity = (Direction * (MaxSpeed / CameraBody.Zoom) * Raylib.GetFrameTime());
+        Velocity = Direction * (MaxSpeed / CameraBody.Zoom) * Raylib.GetFrameTime();
     }
     public override void Update()
     {

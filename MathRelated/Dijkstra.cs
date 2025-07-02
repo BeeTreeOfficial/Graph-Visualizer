@@ -1,18 +1,24 @@
-﻿using System.IO;
+﻿using DijkstraAlgorithm.GraphRelated;
+using DijkstraAlgorithm.GraphRelated.Points;
+using DijkstraAlgorithm.StructsRelated;
+using System.IO;
 
-namespace DijkstraAlgorithm;
-public class DijkstraSolve(Graph graph)
+namespace DijkstraAlgorithm.MathRelated;
+public class Dijkstra(Graph graph)
 {
 
     private HashSet<string> Visited = [];
-    private Dictionary<string, ResultData> Sheet = [];
+    private Result Sheet = new();
     private readonly Dictionary<string, Point> points = graph.points;
-    public Dictionary<string, ResultData> Solve(string StartPointName)
+
+    public static Result Solve(Graph Graph, string Name)
     {
-        if (!points.ContainsKey(StartPointName))
-        {
-            throw new IndexOutOfRangeException($"{StartPointName} Does not exist in this graph");
-        }
+        Dijkstra dijkstra = new(Graph);
+        return dijkstra.Run(Name);
+    }
+    public Result Run(string StartPointName)
+    {
+        if (!points.ContainsKey(StartPointName)) throw new IndexOutOfRangeException($"{StartPointName} Does not exist in this graph");
         InitializeSheet(StartPointName);
         for (int i = 0; i < points.Count; i++)
         {
@@ -22,11 +28,11 @@ public class DijkstraSolve(Graph graph)
             foreach (var item in CurrentPoint.ConnectedEdges)
             {
                 if (Visited.Contains(item.Key)) { continue; }
-                double AlternativeDistance = Sheet[CurrentPoint.Name].Price + item.Value.Length;
-                if (Sheet[item.Key].Price > AlternativeDistance)
+                double AlternativeDistance = Sheet.Body[CurrentPoint.Name].Price + item.Value.Length;
+                if (Sheet.Body[item.Key].Price > AlternativeDistance)
                 {
-                    Sheet[item.Key].Price = AlternativeDistance;
-                    Sheet[item.Key].PreviousPoint = CurrentPoint.Name;
+                    Sheet.Body[item.Key].Price = AlternativeDistance;
+                    Sheet.Body[item.Key].PreviousPoint = CurrentPoint.Name;
                 }
             }
             Visited.Add(CurrentPoint.Name);
@@ -39,7 +45,7 @@ public class DijkstraSolve(Graph graph)
     {
         double MinDistance = double.PositiveInfinity;
         Point? CurrentPoint = null;
-        foreach (var point in Sheet)
+        foreach (var point in Sheet.Body)
         {
             if (point.Value.Price < MinDistance && !Visited.Contains(point.Key))
             {
@@ -54,9 +60,9 @@ public class DijkstraSolve(Graph graph)
     {
         foreach (var item in points)
         {
-            Sheet.Add(item.Key, new(double.PositiveInfinity, null));
+            Sheet.Body.Add(item.Key, new(double.PositiveInfinity, null));
         }
-        Sheet[StartPointName].Price = 0;
+        Sheet.Body[StartPointName].Price = 0;
     }
 
     public static List<string> GetPathToPoint(Dictionary<string, ResultData> Sheet, string Name) { 
