@@ -68,7 +68,6 @@ public class Graph
         }
         points.Remove(PointName);
     }
-
     private void RemoveEdge(Edge EdgeToRemove)
     {
         EdgeToRemove.DetachFromBothPoints();

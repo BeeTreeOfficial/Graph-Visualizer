@@ -1,0 +1,54 @@
+﻿using Raylib_cs;
+using System.Numerics;
+
+namespace DijkstraAlgorithm.CommandsRelated.DerivedCommands;
+
+internal class CommandAddPoint : ICommand
+{
+    public static readonly Dictionary<string, Color> Colors
+        = new Dictionary<string, Color>
+        {
+        { "BEIGE",                Color.Beige },
+        { "BLACK",                Color.Black },
+        { "BLUE",                 Color.Blue },
+        { "BROWN",                Color.Brown },
+        { "DARKBLUE",             Color.DarkBlue },
+        { "DARKGRAY",             Color.DarkGray },
+        { "DARKGREEN",            Color.DarkGreen },
+        { "GOLD",                 Color.Gold },
+        { "GRAY",                 Color.Gray },
+        { "GREEN",                Color.Green },
+        { "LIGHTGRAY",            Color.LightGray },
+        { "LIME",                 Color.Lime },
+        { "MAGENTA",              Color.Magenta },
+        { "MAROON",               Color.Maroon },
+        { "ORANGE",               Color.Orange },
+        { "PINK",                 Color.Pink },
+        { "PURPLE",               Color.Purple },
+        { "RED",                  Color.Red },
+        { "SKYBLUE",              Color.SkyBlue },
+        { "VIOLET",               Color.Violet },
+        { "WHITE",                Color.White },
+        { "YELLOW",               Color.Yellow }
+        };
+    private string nameOfPointToAdd;
+    private Color? colorToSet;
+    private Vector2? PositionToAddIn;
+
+    public CommandAddPoint(string nameOfPointToAdd, string? color = null, Vector2? Position = null)
+    {
+        this.nameOfPointToAdd = nameOfPointToAdd;
+        Color Color = Color.Red;
+        if (color != null) if (Colors.TryGetValue(color, out Color)) colorToSet = Color;
+        if (Position != null) PositionToAddIn = Position;
+    }
+    public void Execute()
+    {
+        Program.Graph.AddToPoints(new(nameOfPointToAdd, PositionToAddIn, colorToSet));
+    }
+    public void Undo()
+    {
+        if (nameOfPointToAdd == null) return;
+        Program.Graph.RemovePoint(nameOfPointToAdd);
+    }
+}

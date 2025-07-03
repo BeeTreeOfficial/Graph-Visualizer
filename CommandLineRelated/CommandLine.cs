@@ -1,8 +1,8 @@
 ﻿using Raylib_cs;
 
-namespace DijkstraAlgorithm.CommandRelated;
+namespace DijkstraAlgorithm.CommandLineRelated;
 
-internal class CommandLine
+public class CommandLine
 {
     public bool IsTyping = false;
     public string buffer = "";
@@ -14,7 +14,7 @@ internal class CommandLine
         switch (pressedKey)
         {
             case KeyboardKey.Enter:
-                CommandExecutor.Execute(ref buffer, ref IsTyping);
+                CommandsParser.Execute(ref buffer, ref IsTyping);
                 buffer = "";
                 break;
             case KeyboardKey.Space:

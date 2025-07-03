@@ -1,10 +1,11 @@
 ﻿using DijkstraAlgorithm.MathRelated;
 using DijkstraAlgorithm.GraphRelated;
-using DijkstraAlgorithm;
+using DijkstraAlgorithm.CommandsRelated;
+using DijkstraAlgorithm.CommandsRelated.DerivedCommands;
 
-namespace DijkstraAlgorithm.CommandRelated;
+namespace DijkstraAlgorithm.CommandLineRelated;
 
-internal class CommandExecutor
+internal class CommandsParser
 {
     public static void Execute(ref string buffer, ref bool IsTyping)
     {
@@ -16,12 +17,11 @@ internal class CommandExecutor
             if (commands.Length == 2)
             {
                 graph.RemovePoint(commands[1]);
-                if (Program.SelectedPoint != null && Program.SelectedPoint.Name == commands[1]) Program.SelectedPoint = null;
+                
             }
             else if (commands.Length == 3)
             {
                 graph.RemoveEdgeByName(commands[1], commands[2]);
-                graph.RemoveEdgeByName(commands[2], commands[1]);
             }
         }
         else if (commands.Contains("ADD"))
@@ -29,12 +29,10 @@ internal class CommandExecutor
             switch (commands.Length)
             {
                 case 2:
-                    graph.AddToPoints(new(commands[1], Program.Camera.GetBody().Target));
+                    Program.commandDeque.Execute(new CommandAddPoint(commands[1], null, Program.Camera.GetBody().Target));
                     break;
                 case 3:
-                    graph.AddToPoints(
-                        new(commands[1], Program.Camera.GetBody().Target,
-                        commands[2]));
+                    Program.commandDeque.Execute(new CommandAddPoint(commands[1], commands[2], Program.Camera.GetBody().Target));
                     break;
                 default:
                     break;
@@ -45,7 +43,7 @@ internal class CommandExecutor
             switch (commands.Length)
             {
                 case 3:
-                    graph.CreateConnection(commands[1], commands[2]);
+                    Program.commandDeque.Execute(new CommandCreateConnection(commands[1], commands[2]));
                     break;
                 default:
                     break;
@@ -105,8 +103,11 @@ internal class CommandExecutor
             graph.CreateConnection("D", "E");
             graph.Shuffle();
             Program.SelectedPoint = null;
+        } else if (commands.Contains("UNDO"))
+        {
+            Program.commandDeque.Undo();
         }
-        buffer = "";
+            buffer = "";
 
     }
 }
