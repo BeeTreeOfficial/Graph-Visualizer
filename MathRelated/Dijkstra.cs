@@ -17,7 +17,7 @@ public class Dijkstra(Graph graph)
     }
     public Result Run(string StartPointName)
     {
-        if (!points.ContainsKey(StartPointName)) throw new IndexOutOfRangeException($"{StartPointName} Does not exist in this graph");
+        if (!points.ContainsKey(StartPointName)) return Sheet;
         InitializeSheet(StartPointName);
         for (int i = 0; i < points.Count; i++)
         {
@@ -39,7 +39,6 @@ public class Dijkstra(Graph graph)
 
         return Sheet;
     }
-
     private Point? GetCurrentPoint()
     {
         double MinDistance = double.PositiveInfinity;
