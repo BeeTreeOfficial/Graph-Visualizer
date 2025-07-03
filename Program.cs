@@ -6,16 +6,18 @@ using DijkstraAlgorithm.GraphRelated.Points;
 using DijkstraAlgorithm.CommandLineRelated;
 using DijkstraAlgorithm.RenderRelated;
 using DijkstraAlgorithm.CommandsRelated;
+using DijkstraAlgorithm.StructsRelated;
 
 namespace DijkstraAlgorithm;
 public class Program
 {
+    private static Graph graph = new();
+    public static Graph Graph { get { return graph; } }
     public static Point? SelectedPoint = null;
     public static FlyingCamera Camera = new(new(0, 0), 1, 1);
     public static CommandLine commandLine = new();
     public static CommandDeque commandDeque = new();
-    private static Graph graph = new();
-    public static Graph Graph { get { return graph; } }
+    public static OutputBuffer outputBuffer = new();
     public static void Main()
     {
         Renderer.Init(1100, 800);
