@@ -23,7 +23,7 @@ public class Load
                 color.R = (byte)float.Parse(Arguments[4][3..]);
                 color.G = (byte)float.Parse(Arguments[5][2..]);
                 color.B = (byte)float.Parse(Arguments[6][2..]);
-                Program.commandDeque.Execute(new CommandAddPoint(Name, color, new(x,y)));
+                Program.commandDeque.Execute(new CommandAddPoint(Name, color, new(x, y)));
             }
             if (Arguments[0] == "Edge:" && Arguments.Length >= 3)
             {

@@ -9,7 +9,7 @@ public class CommandDeque
 
     public  void Execute(ICommand command)
     {
-        if (commands.Count > 10) commands.RemoveFirst();
+        if (commands.Count > 10000) commands.RemoveFirst();
         commands.AddLast(command);
         command.Execute();
     }

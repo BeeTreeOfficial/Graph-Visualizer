@@ -30,7 +30,7 @@ public class Program
             KeyboardKey pressedKey = (KeyboardKey)Raylib.GetKeyPressed();
             if (!commandLine.IsTyping)
             {
-                if (Raylib.IsKeyPressed(KeyboardKey.Z)) commandDeque.Undo();
+                if (Raylib.IsKeyDown(KeyboardKey.Z)) commandDeque.Undo();
                 if (pressedKey == KeyboardKey.F) Draw.Drawing.ToggleFullScreen();
                 SelectedPoint?.Update();
                 Camera.Update();

@@ -22,7 +22,7 @@ public class Point
 
     public void Draw()
     {
-        Raylib.DrawCircle((int)position.X, (int)position.Y, 6, color);
+        Raylib.DrawRectangle((int)position.X - 5, (int)position.Y - 5, 10, 10, color);
         Raylib.DrawText(Name, (int)(position.X + 20), (int)(position.Y - 30), 23, Color.Black);
     }
 
