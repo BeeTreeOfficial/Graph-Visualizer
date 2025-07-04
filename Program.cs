@@ -10,9 +10,6 @@ using DijkstraAlgorithm.Commands;
 namespace DijkstraAlgorithm;
 public class Program
 {
-
-
-
     private static Graph graph = new();
     public static Graph Graph { get { return graph; } }
     public static Point? SelectedPoint = null;
