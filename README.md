@@ -1,6 +1,5 @@
-# Dijkstra Algorithm Visualizer
+# Graph Visualizer
 
-A real-time, interactive graph editor and pathfinding visualization tool built with C# and Raylib_cs. Create, edit, and visualize graphs, then solve shortest-path problems using Dijkstra’s algorithm (and Bellman–Ford) right in the window.
 
 ## Features
 
