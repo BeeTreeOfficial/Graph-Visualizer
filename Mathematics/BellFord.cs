@@ -1,7 +1,7 @@
-﻿using DijkstraAlgorithm.GraphRelated;
-using DijkstraAlgorithm.StructsRelated;
+﻿using DijkstraAlgorithm.Graphs;
+using DijkstraAlgorithm.Structs;
 
-namespace DijkstraAlgorithm.MathRelated
+namespace DijkstraAlgorithm.Mathematics
 {
     public class BellFord
     {

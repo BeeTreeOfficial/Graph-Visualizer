@@ -1,14 +1,13 @@
-﻿using DijkstraAlgorithm.MathRelated;
-using DijkstraAlgorithm.GraphRelated;
-using DijkstraAlgorithm.CommandsRelated.DerivedCommands;
+﻿using DijkstraAlgorithm.Mathematics;
+using DijkstraAlgorithm.Graphs;
+using DijkstraAlgorithm.Commands.DerivedCommands;
 
-namespace DijkstraAlgorithm.CommandLineRelated;
+namespace DijkstraAlgorithm.CommandLines;
 
 internal class CommandsParser
 {
     public static void Execute(ref string buffer, ref bool IsTyping)
     {
-        
         Graph graph = Program.Graph;
         string[] commands = buffer.Split(" ");
         if (commands.Contains("DEL"))
@@ -77,16 +76,23 @@ internal class CommandsParser
             }
             IsTyping = false;
         }
-        else if (commands.Contains("BELL"))
+        else if (commands.Contains("BELL") && commands.Length >= 2)
         {
             BellFord bell = new(graph, commands[1]);
             Console.WriteLine(bell.Solve());
         }
+        else if (commands.Contains("SAVE") && commands.Length >= 2)
+        {
+            Persistence.Save.SaveGraphTo(graph, commands[1]);
+        }
+        else if (commands.Contains("LOAD") && commands.Length >= 2)
+        {
+            Persistence.Load.LoadFromFile(commands[1]);
+            Console.WriteLine(graph.Points);
+        }
         else if (commands.Contains("NEW"))
         {
-            graph.points.Clear();
-            graph.edges.Clear();
-            Console.WriteLine("Graph Is Cleared");
+            Program.commandDeque.Execute(new CommandClearGraph());
         }
         else if (commands.Contains("ABC"))
         {

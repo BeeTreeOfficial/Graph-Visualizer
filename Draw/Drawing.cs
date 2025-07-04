@@ -1,11 +1,12 @@
-﻿using DijkstraAlgorithm.CommandLineRelated;
-using DijkstraAlgorithm.GraphRelated;
-using DijkstraAlgorithm.GraphRelated.Points;
-using Raylib_cs;
+﻿using Raylib_cs;
 
-namespace DijkstraAlgorithm.RenderRelated;
+using DijkstraAlgorithm.CommandLines;
+using DijkstraAlgorithm.Graphs;
+using DijkstraAlgorithm.Graphs.Points;
 
-internal static class Renderer
+namespace DijkstraAlgorithm.Draw;
+
+internal static class Drawing
 {
     public static void Init(int x, int y)
     {

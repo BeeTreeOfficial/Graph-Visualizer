@@ -1,4 +1,4 @@
-﻿namespace DijkstraAlgorithm.CommandsRelated;
+﻿namespace DijkstraAlgorithm.Commands;
 public interface ICommand
 {
     public void Execute();

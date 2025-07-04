@@ -1,8 +1,8 @@
-﻿using DijkstraAlgorithm.GraphRelated;
-using DijkstraAlgorithm.MathRelated;
-using DijkstraAlgorithm.StructsRelated;
+﻿using DijkstraAlgorithm.Graphs;
+using DijkstraAlgorithm.Mathematics;
+using DijkstraAlgorithm.Structs;
 
-namespace DijkstraAlgorithm.CommandsRelated.DerivedCommands;
+namespace DijkstraAlgorithm.Commands.DerivedCommands;
 
 public class CommandSolveDextra : ICommand
 {

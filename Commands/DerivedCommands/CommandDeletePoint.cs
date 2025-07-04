@@ -1,6 +1,6 @@
-﻿using DijkstraAlgorithm.GraphRelated.Points;
+﻿using DijkstraAlgorithm.Graphs.Points;
 
-namespace DijkstraAlgorithm.CommandsRelated.DerivedCommands;
+namespace DijkstraAlgorithm.Commands.DerivedCommands;
 
 public class CommandDeletePoint : ICommand
 {

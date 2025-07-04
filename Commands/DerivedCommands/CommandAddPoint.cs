@@ -1,7 +1,7 @@
 ﻿using Raylib_cs;
 using System.Numerics;
 
-namespace DijkstraAlgorithm.CommandsRelated.DerivedCommands;
+namespace DijkstraAlgorithm.Commands.DerivedCommands;
 
 internal class CommandAddPoint : ICommand
 {
@@ -42,9 +42,15 @@ internal class CommandAddPoint : ICommand
         if (color != null) if (Colors.TryGetValue(color, out Color)) colorToSet = Color;
         if (Position != null) PositionToAddIn = Position;
     }
+    public CommandAddPoint(string nameOfPointToAdd, Color color, Vector2? Position = null)
+    {
+        this.nameOfPointToAdd = nameOfPointToAdd;
+        this.colorToSet = color;
+        if (Position != null) PositionToAddIn = Position;
+    }
     public void Execute()
     {
-        Program.Graph.AddToPoints(new(nameOfPointToAdd, PositionToAddIn, colorToSet));
+            Program.Graph.AddToPoints(new(nameOfPointToAdd, PositionToAddIn, colorToSet));
     }
     public void Undo()
     {

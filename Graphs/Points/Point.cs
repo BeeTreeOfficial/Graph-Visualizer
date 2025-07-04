@@ -1,8 +1,8 @@
 ﻿using Raylib_cs;
-using DijkstraAlgorithm.GraphRelated.Edges;
+using DijkstraAlgorithm.Graphs.Edges;
 using System.Numerics;
 
-namespace DijkstraAlgorithm.GraphRelated.Points;
+namespace DijkstraAlgorithm.Graphs.Points;
 public class Point
 {
     public void DrawHighlight()

@@ -1,11 +1,16 @@
-﻿using DijkstraAlgorithm.GraphRelated.Edges;
-using DijkstraAlgorithm.GraphRelated.Points;
-namespace DijkstraAlgorithm.GraphRelated;
+﻿using DijkstraAlgorithm.Graphs.Edges;
+using DijkstraAlgorithm.Graphs.Points;
+namespace DijkstraAlgorithm.Graphs;
 public class Graph
 {
     public Dictionary<string, Point> points = [];
     public Dictionary<(string, string), Edge> edges = [];
 
+    public void Clear()
+    {
+        points = new();
+        edges = new();
+    }
     public Dictionary<string, Point> Points {  get { return points; } }
     public Point? GetPoint(string PointName)
     {

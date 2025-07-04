@@ -1,7 +1,7 @@
 ﻿using Raylib_cs;
 using System.Numerics;
 
-namespace DijkstraAlgorithm.CameraRelated;
+namespace DijkstraAlgorithm.Cameras;
 
 public abstract class BaseCamera
 {

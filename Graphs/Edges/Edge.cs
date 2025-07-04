@@ -1,8 +1,8 @@
 ﻿using Raylib_cs;
-using DijkstraAlgorithm.GraphRelated.Points;
+using DijkstraAlgorithm.Graphs.Points;
 using System.Numerics;
 
-namespace DijkstraAlgorithm.GraphRelated.Edges;
+namespace DijkstraAlgorithm.Graphs.Edges;
 
 public class Edge(Point Left, Point Right)
 {

@@ -1,9 +1,9 @@
-﻿using DijkstraAlgorithm.GraphRelated;
-using DijkstraAlgorithm.GraphRelated.Points;
-using DijkstraAlgorithm.StructsRelated;
+﻿using DijkstraAlgorithm.Graphs;
+using DijkstraAlgorithm.Graphs.Points;
+using DijkstraAlgorithm.Structs;
 using System.IO;
 
-namespace DijkstraAlgorithm.MathRelated;
+namespace DijkstraAlgorithm.Mathematics;
 public class Dijkstra(Graph graph)
 {
 

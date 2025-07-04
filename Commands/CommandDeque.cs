@@ -1,6 +1,6 @@
 ﻿
 
-namespace DijkstraAlgorithm.CommandsRelated;
+namespace DijkstraAlgorithm.Commands;
 
 public class CommandDeque
 {
@@ -9,6 +9,7 @@ public class CommandDeque
 
     public  void Execute(ICommand command)
     {
+        if (commands.Count > 10) commands.RemoveFirst();
         commands.AddLast(command);
         command.Execute();
     }

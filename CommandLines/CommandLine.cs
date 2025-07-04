@@ -1,6 +1,7 @@
-﻿using Raylib_cs;
+﻿using DijkstraAlgorithm.Graphs;
+using Raylib_cs;
 
-namespace DijkstraAlgorithm.CommandLineRelated;
+namespace DijkstraAlgorithm.CommandLines;
 
 public class CommandLine
 {

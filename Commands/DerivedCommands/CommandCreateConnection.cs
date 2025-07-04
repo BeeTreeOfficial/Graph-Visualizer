@@ -1,6 +1,6 @@
 ﻿
 
-namespace DijkstraAlgorithm.CommandsRelated.DerivedCommands;
+namespace DijkstraAlgorithm.Commands.DerivedCommands;
 
 public class CommandCreateConnection : ICommand
 {

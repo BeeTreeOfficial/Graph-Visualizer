@@ -1,4 +1,4 @@
-﻿using DijkstraAlgorithm.StructsRelated;
+﻿using DijkstraAlgorithm.Structs;
 
 namespace DijkstraAlgorithm;
 

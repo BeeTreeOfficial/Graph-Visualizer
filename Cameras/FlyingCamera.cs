@@ -1,7 +1,7 @@
 ﻿using Raylib_cs;
 using System.Numerics;
 
-namespace DijkstraAlgorithm.CameraRelated;
+namespace DijkstraAlgorithm.Cameras;
 
 public class FlyingCamera(Vector2 Target, float Zoom, int MaxSpeed) : BaseCamera(new(Raylib.GetScreenWidth() / 2, Raylib.GetScreenHeight() / 2), Target, Zoom)
 {

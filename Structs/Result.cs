@@ -1,5 +1,5 @@
 ﻿
-namespace DijkstraAlgorithm.StructsRelated;
+namespace DijkstraAlgorithm.Structs;
 
 public class Result : IFormattable
 {
@@ -20,9 +20,9 @@ public class Result : IFormattable
                 $"      " +
                 "The Path is ";
             string? CurrentLastPoint = Data.PreviousPoint;
-            while (!String.IsNullOrEmpty(CurrentLastPoint))
+            while (!string.IsNullOrEmpty(CurrentLastPoint))
             {
-                if (String.IsNullOrEmpty(Body[CurrentLastPoint].PreviousPoint))
+                if (string.IsNullOrEmpty(Body[CurrentLastPoint].PreviousPoint))
                 {
                     result += CurrentLastPoint;
                     CurrentLastPoint = Body[CurrentLastPoint].PreviousPoint;
