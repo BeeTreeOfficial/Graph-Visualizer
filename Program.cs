@@ -22,7 +22,7 @@ public class Program
     public static void Main()
     {   
         Draw.Drawing.Init(1100, 800);
-        Raylib.SetTargetFPS(120);
+        Console.Clear();
         Persistence.Load.LoadFromFile("RECENT");
         while (!Raylib.WindowShouldClose())
         {
