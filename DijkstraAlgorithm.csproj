@@ -1,18 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0-windows10.0.22000.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 
-  <ItemGroup>
-    <Compile Remove="GlobalSuppressions.cs" />
-  </ItemGroup>
+		<!-- 2) Include the .NET runtime in your output -->
+		<SelfContained>true</SelfContained>
 
-  <ItemGroup>
-    <PackageReference Include="Raylib-cs" Version="7.0.1" />
-  </ItemGroup>
+		<!-- 3) Bundle app + runtime + native libs into a single .exe -->
+		<PublishSingleFile>true</PublishSingleFile>
+		<BundleNativeBinaries>true</BundleNativeBinaries>
+		<SupportedOSPlatformVersion>8.0</SupportedOSPlatformVersion>
+		<ApplicationIcon>G Abstract.ico</ApplicationIcon>
+		<IncludeNativeLibrariesForSelfExtract>false</IncludeNativeLibrariesForSelfExtract>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="GlobalSuppressions.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="G Abstract.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Raylib-cs" Version="7.0.1" />
+	</ItemGroup>
 
 </Project>

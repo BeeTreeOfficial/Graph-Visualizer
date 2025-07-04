@@ -1,46 +1,28 @@
-﻿using DijkstraAlgorithm.Graphs.Edges;
+﻿using Raylib_cs;
+using DijkstraAlgorithm.Graphs.Edges;
 using DijkstraAlgorithm.Graphs.Points;
+
 namespace DijkstraAlgorithm.Graphs;
-public class Graph
+public partial class Graph
 {
     public Dictionary<string, Point> points = [];
     public Dictionary<(string, string), Edge> edges = [];
-
-    public void Clear()
-    {
-        points = new();
-        edges = new();
-    }
-    public Dictionary<string, Point> Points {  get { return points; } }
+    public Dictionary<string, Point> Points { get {return points;} }
     public Point? GetPoint(string PointName)
     {
         points.TryGetValue(PointName, out Point? point);
         return point;
     }
-    public Graph() { }
+    public Graph()
+    {
+        this.points = [];
+        this.edges = [];
+    }
     public Graph(Dictionary<string, Point> points, Dictionary<(string, string), Edge> edges)
     {
         this.points = points;
         this.edges = edges;
     }
-
-    public void Print()
-    {
-        Console.WriteLine("---------------------");
-        foreach (var item in points)
-        {
-            Console.Write($"The Point is Named: {item.Key} || Contains Links To: \n");
-            foreach (var point in item.Value.ConnectedEdges)
-            {
-                Console.Write($"\n" +
-                    $"    " +
-                    $"{point.Key} - with distance: {(int)point.Value.Length}; ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine("---------------------");
-    }
-
     public void CreateConnection(string from, string to, bool OneWay = false)
     {
         if (!points.TryGetValue(from, out Point? PointFrom) || !points.TryGetValue(to, out Point? PointTo) || DoesThisKindOfConnectionExist(from, to) || from == to) return;
@@ -50,8 +32,6 @@ public class Graph
         if (OneWay) return;
         PointTo.LinkToEdge(edge);
     }
-
-
     public void AddToPoints(Point point)
     {
         if (points.ContainsKey(point.Name))
@@ -62,8 +42,6 @@ public class Graph
         }
         points.Add(point.Name, point);
     }
-
-
     public void RemovePoint(string PointName)
     {
         if (!points.TryGetValue(PointName, out Point? PointToDelete)) return;
@@ -85,7 +63,6 @@ public class Graph
             edges.Remove((EdgeToRemove.Right.Name, EdgeToRemove.Left.Name));
         }
     }
-
     public void RemoveEdgeByName(string first, string second)
     {
         if (edges.ContainsKey((first, second)))
@@ -95,19 +72,6 @@ public class Graph
         else if (edges.ContainsKey((second, first)))
         {
             RemoveEdge(edges[(second, first)]);
-        }
-    }
-
-
-    public void Draw()
-    {
-        foreach (var item in edges)
-        {
-            item.Value.Draw();
-        }
-        foreach (var item in points)
-        {
-            item.Value.Draw();
         }
     }
     private bool DoesThisKindOfConnectionExist(string first, string second)
@@ -138,6 +102,11 @@ public class Graph
         {
             item.Value.Shuffle();
         }
+    }
+    public void Clear()
+    {
+        points = [];
+        edges = [];
     }
 }
 

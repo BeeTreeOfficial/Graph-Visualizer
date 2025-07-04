@@ -4,8 +4,8 @@ namespace DijkstraAlgorithm.Commands.DerivedCommands;
 
 public class CommandCreateConnection : ICommand
 {
-    private string from;
-    private string to;
+    private readonly string from;
+    private readonly string to;
     public CommandCreateConnection(string from, string to)
     {
         this.from = from;

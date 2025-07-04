@@ -4,11 +4,15 @@ using System.Numerics;
 
 namespace DijkstraAlgorithm.Graphs.Edges;
 
-public class Edge(Point Left, Point Right)
+public partial class Edge
 {
-    public Point left = Left;
-    public Point right = Right;
-    public Color color = Color.Red;
+    public Edge(Point Left, Point Right)
+    {
+        this.left = Left;
+        this.right = Right;
+    }
+    public Point left;
+    public Point right;
     public Point Left
     {
         get { return left; }
@@ -18,13 +22,6 @@ public class Edge(Point Left, Point Right)
     {
         get { return right; }
         set { right = value; }
-    }
-    public void Draw()
-    {
-        int X = ((int)Left.position.X + (int)Right.position.X) / 2;
-        int Y = ((int)Left.position.Y + (int)Right.position.Y) / 2;
-        Raylib.DrawLine((int)Left.position.X, (int)Left.position.Y, (int)Right.position.X, (int)Right.position.Y, color);
-        Raylib.DrawText(Convert.ToString((int)Length), X, Y, 8, color);
     }
 
     public void DetachFromBothPoints()
