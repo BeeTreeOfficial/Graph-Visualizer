@@ -84,7 +84,7 @@ internal class CommandsParser
         }
         else if (commands.Contains("SAVE") && commands.Length >= 2)
         {
-            Storage.Save(graph, commands[1]);
+            Storage.Save(commands[1], graph);
         }
         else if (commands.Contains("LOAD") && commands.Length >= 2)
         {

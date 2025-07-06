@@ -1,11 +1,11 @@
-﻿using System;
-using Raylib_cs;
+﻿using Raylib_cs;
 
 using DijkstraAlgorithm.Cameras;
 using DijkstraAlgorithm.Graphs;
 using DijkstraAlgorithm.Graphs.Points;
 using DijkstraAlgorithm.CommandLines;
 using DijkstraAlgorithm.Commands;
+using DijkstraAlgorithm.Draw;
 using DijkstraAlgorithm.Persistence;
 
 namespace DijkstraAlgorithm;
@@ -18,10 +18,16 @@ public class Program
     public static CommandLine commandLine = new();
     public static CommandDeque commandDeque = new();
     public static void Main()
-    {   
-        Draw.Drawing.Init(1100, 800);
+    {
+        int WindowWidth = 1100;
+        int WindowHeight = 800;
+
+        string DefaultSave = "Recent";
+
+        Drawing.Init(WindowWidth, WindowHeight);
         Console.Clear();
-        Storage.Load("RECENT");
+        Storage.Load(DefaultSave);
+
         while (!Raylib.WindowShouldClose())
         {
             commandLine.Update();
@@ -33,8 +39,8 @@ public class Program
                 SelectedPoint?.Update();
                 Camera.Update();
             }
-            Draw.Drawing.Draw(graph, SelectedPoint, commandLine, Camera.Body);
+            Drawing.Draw(graph, SelectedPoint, commandLine, Camera.Body);
         }
-        Storage.Save(graph, "Recent");
+        Storage.Save(DefaultSave, graph);
     }
 }

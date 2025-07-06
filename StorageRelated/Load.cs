@@ -1,6 +1,7 @@
-﻿using DijkstraAlgorithm.Commands.DerivedCommands;
+﻿using Raylib_cs;
+
+using DijkstraAlgorithm.Commands.DerivedCommands;
 using DijkstraAlgorithm.Graphs;
-using Raylib_cs;
 
 namespace DijkstraAlgorithm.Persistence;
 public partial class Storage

@@ -7,7 +7,7 @@ namespace DijkstraAlgorithm.Persistence;
 
 public partial class Storage
 {
-    public static void Save(Graph graph, string NameOfFileToSafeTo)
+    public static void Save(string NameOfFileToSafeTo, Graph graph)
     {
         List<string> Content = []; 
         foreach (var (Name, Point) in graph.Points)

@@ -13,5 +13,4 @@ public class State
     public ICamera camera;
     public CommandLine commandLine;
     public CommandDeque commandDeque;
-
 }
