@@ -39,7 +39,8 @@ internal class CommandAddPoint : ICommand
     {
         this.nameOfPointToAdd = nameOfPointToAdd;
         byte[] randcolor = [0,0,0];
-        Program.random.NextBytes(randcolor);
+        Random random = new Random();
+        random.NextBytes(randcolor);
         colorToSet = new(randcolor[0], randcolor[1], randcolor[2]);
         if (color != null) if (Colors.TryGetValue(color, out Color Color)) colorToSet = Color;
         if (Position != null) PositionToAddIn = Position;

@@ -13,16 +13,6 @@ public partial class Graph
         points.TryGetValue(PointName, out Point? point);
         return point;
     }
-    public Graph()
-    {
-        this.points = [];
-        this.edges = [];
-    }
-    public Graph(Dictionary<string, Point> points, Dictionary<(string, string), Edge> edges)
-    {
-        this.points = points;
-        this.edges = edges;
-    }
     public void CreateConnection(string from, string to, bool OneWay = false)
     {
         if (!points.TryGetValue(from, out Point? PointFrom) || !points.TryGetValue(to, out Point? PointTo) || DoesThisKindOfConnectionExist(from, to) || from == to) return;
@@ -82,18 +72,6 @@ public partial class Graph
             return true;
         }
         return false;
-    }
-
-    public void CreateRandomConnections()
-    {
-        edges.Clear();
-        int AmountOfConnections = Program.random.Next(1, points.Count) * 3;
-        List<string> Names = [.. points.Keys];
-        for (int i = 0; i < AmountOfConnections; i++)
-        {
-            (int, int) Numbers = (Program.random.Next(points.Count), Program.random.Next(points.Count));
-            CreateConnection(Names[Numbers.Item1], Names[Numbers.Item2]);
-        }
     }
 
     public void Shuffle()

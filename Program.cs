@@ -37,10 +37,4 @@ public class Program
         }
         Storage.Save(graph, "Recent");
     }
-
-
-    public readonly static Random random = new();
-
-
-
 }

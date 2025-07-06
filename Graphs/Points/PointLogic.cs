@@ -18,7 +18,8 @@ public partial class Point: IPosition
     }
     public void Shuffle()
     {
-        Position = new(Program.random.Next(1000), Program.random.Next(1000));
+        Random random = new Random();
+        Position = new(random.Next(1000), random.Next(1000));
     }
     public void Update()
     {
