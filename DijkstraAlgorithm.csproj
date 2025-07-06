@@ -5,17 +5,13 @@
 		<TargetFramework>net8.0-windows10.0.22000.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 
-		<!-- 2) Include the .NET runtime in your output -->
-		<SelfContained>true</SelfContained>
 
 		<!-- 3) Bundle app + runtime + native libs into a single .exe -->
 		<PublishSingleFile>true</PublishSingleFile>
 		<BundleNativeBinaries>true</BundleNativeBinaries>
 		<SupportedOSPlatformVersion>8.0</SupportedOSPlatformVersion>
 		<ApplicationIcon>G Abstract.ico</ApplicationIcon>
-		<IncludeNativeLibrariesForSelfExtract>false</IncludeNativeLibrariesForSelfExtract>
 	</PropertyGroup>
 
 	<ItemGroup>

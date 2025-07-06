@@ -1,5 +1,4 @@
-﻿using DijkstraAlgorithm.Graphs;
-using Raylib_cs;
+﻿using Raylib_cs;
 
 namespace DijkstraAlgorithm.CommandLines;
 
@@ -38,6 +37,6 @@ public class CommandLine
     }
     public void Draw()
     {
-        Raylib.DrawText(buffer + '_', 2, Raylib.GetScreenHeight() - 35, 35, Color.Black);
+        Raylib.DrawText(buffer + '_', 2, Raylib.GetScreenHeight() - 35, 35, Color.White);
     }
 }

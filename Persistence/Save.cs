@@ -12,7 +12,7 @@ public class Save
         List<string> Content = []; 
         foreach (var (Name, Point) in graph.Points)
         {
-            Content.Add($"Point: {Name} {Point.position.X} {Point.position.Y} {Point.Color}");       
+            Content.Add($"Point: {Name} {Point.Position.X} {Point.Position.Y} {Point.Color}");       
         }
         foreach (var Edges in graph.edges)
         {

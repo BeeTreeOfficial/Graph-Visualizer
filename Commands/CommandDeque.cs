@@ -4,19 +4,21 @@ namespace DijkstraAlgorithm.Commands;
 
 public class CommandDeque
 {
-    private LinkedList<ICommand> commands = new();
-    public LinkedList<ICommand> Commands { get { return commands; } }
-
+    public LinkedList<ICommand> Commands { get; }
+    public CommandDeque()
+    {
+        Commands = [];
+    }
     public  void Execute(ICommand command)
     {
-        if (commands.Count > 10000) commands.RemoveFirst();
-        commands.AddLast(command);
+        if (Commands.Count > 256) Commands.RemoveFirst();
+        Commands.AddLast(command);
         command.Execute();
     }
     public void Undo()
     {
-        if (commands.Count <= 0) return;
-        commands.Last().Undo();
-        commands.RemoveLast();
+        if (Commands.Count <= 0) return;
+        Commands.Last().Undo();
+        Commands.RemoveLast();
     }
 }

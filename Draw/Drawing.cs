@@ -8,6 +8,7 @@ namespace DijkstraAlgorithm.Draw;
 
 internal static class Drawing
 {
+    private static Color BackgroundColor = new(40, 40, 40);
     public static void Init(int x, int y)
     {
         Raylib.InitWindow(x, y, "Dijkstra Algorithm");
@@ -15,7 +16,7 @@ internal static class Drawing
     public static void Draw(Graph Graph, Point? SelectedPoint, CommandLine commandLine, Camera2D Camera)
     {
         Raylib.BeginDrawing();
-        Raylib.ClearBackground(Color.White);
+        Raylib.ClearBackground(BackgroundColor);
         Raylib.BeginMode2D(Camera);
         Graph.Draw();
         SelectedPoint?.DrawHighlight();

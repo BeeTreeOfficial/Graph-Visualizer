@@ -38,8 +38,10 @@ internal class CommandAddPoint : ICommand
     public CommandAddPoint(string nameOfPointToAdd, string? color = null, Vector2? Position = null)
     {
         this.nameOfPointToAdd = nameOfPointToAdd;
-        Color Color = Color.Red;
-        if (color != null) if (Colors.TryGetValue(color, out Color)) colorToSet = Color;
+        byte[] randcolor = [0,0,0];
+        Program.random.NextBytes(randcolor);
+        colorToSet = new(randcolor[0], randcolor[1], randcolor[2]);
+        if (color != null) if (Colors.TryGetValue(color, out Color Color)) colorToSet = Color;
         if (Position != null) PositionToAddIn = Position;
     }
     public CommandAddPoint(string nameOfPointToAdd, Color color, Vector2? Position = null)

@@ -1,7 +1,6 @@
 ﻿using DijkstraAlgorithm.Graphs;
 using DijkstraAlgorithm.Graphs.Points;
 using DijkstraAlgorithm.Structs;
-using System.IO;
 
 namespace DijkstraAlgorithm.Mathematics;
 public class Dijkstra(Graph graph)
@@ -19,19 +18,20 @@ public class Dijkstra(Graph graph)
     {
         if (!points.ContainsKey(StartPointName)) return Sheet;
         InitializeSheet(StartPointName);
-        for (int i = 0; i < points.Count; i++)
+        for (int _ = 0; _ < points.Count; _++)
         {
             if (Visited.Count == points.Count) { break; }
             Point? CurrentPoint = GetCurrentPoint();
             if (CurrentPoint == null) { break; }
-            foreach (var item in CurrentPoint.ConnectedEdges)
+            foreach (var (OppositePointName, EdgeToOppositePoint) in CurrentPoint.ConnectedEdges)
             {
-                if (Visited.Contains(item.Key)) { continue; }
-                double AlternativeDistance = Sheet.Body[CurrentPoint.Name].Price + item.Value.Length;
-                if (Sheet.Body[item.Key].Price > AlternativeDistance)
+                var SheetCell = Sheet.Body[OppositePointName];
+                if (Visited.Contains(OppositePointName)) { continue; }
+                double AlternativeDistance = Sheet.Body[CurrentPoint.Name].Price + EdgeToOppositePoint.Length;
+                if (Sheet.Body[OppositePointName].Price > AlternativeDistance)
                 {
-                    Sheet.Body[item.Key].Price = AlternativeDistance;
-                    Sheet.Body[item.Key].PreviousPoint = CurrentPoint.Name;
+                    SheetCell.Price = AlternativeDistance;
+                    SheetCell.PreviousPoint = CurrentPoint.Name;
                 }
             }
             Visited.Add(CurrentPoint.Name);
@@ -56,9 +56,9 @@ public class Dijkstra(Graph graph)
 
     private void InitializeSheet(string StartPointName)
     {
-        foreach (var item in points)
+        foreach (var Point in points)
         {
-            Sheet.Body.Add(item.Key, new(double.PositiveInfinity, null));
+            Sheet.Body.Add(Point.Key, new(double.PositiveInfinity, null));
         }
         Sheet.Body[StartPointName].Price = 0;
     }

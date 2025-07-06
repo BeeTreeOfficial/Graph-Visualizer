@@ -1,17 +1,20 @@
-﻿using Raylib_cs;
+﻿using DijkstraAlgorithm.Draw;
+using Raylib_cs;
+using System.Numerics;
 
 namespace DijkstraAlgorithm.Graphs.Edges;
 
 public partial class Edge
 {
+    public float Thickness { get { return Math.Clamp(Length / 100f, 10, 100); } }
     public void Draw()
     {
-        float Length = this.Length;
-        byte Ratio = (byte)Math.Clamp(Length / 10, 0, 255);
-        Color Color = new(Math.Min(Ratio * 4, 255), 255 - Ratio, 255 - Ratio);
-        int X = ((int)Left.position.X + (int)Right.position.X) / 2;
-        int Y = ((int)Left.position.Y + (int)Right.position.Y) / 2;
-        Raylib.DrawLineEx(Left.position, Right.position, Math.Clamp(10000f / Length, 4, 25), Color);
-        Raylib.DrawText(Convert.ToString((int)Length), X, Y, 8, Raylib_cs.Color.Black);
+        float Length = (this.Length);
+        Color CalculatedAverage = Raylib.ColorLerp(Left.Color, Right.Color, 0.5f);
+        Color Color =Raylib.ColorContrast(CalculatedAverage, Math.Clamp(Length / 500f - 0.5f, -1, 1));
+        Vector2 Position = new(Left.Position.X + Right.Position.X, Left.Position.Y + Right.Position.Y);
+        Position /= 2;
+        Drawer.DrawLineBetweenToPoints(Left.Position, Right.Position, Thickness, Color);
+        Drawer.DrawNumber(Length, Position, Raylib.ColorBrightness(Color, 0.9f), Math.Sqrt(Length) * 2);
     }
 }

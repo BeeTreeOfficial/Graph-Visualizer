@@ -29,7 +29,7 @@ public class FlyingCamera(Vector2 Target, float Zoom, int MaxSpeed) : BaseCamera
         if (Raylib.IsKeyDown(KeyboardKey.E) - Raylib.IsKeyDown(KeyboardKey.Q))
         {
             CameraBody.Zoom = Math.Clamp(CameraBody.Zoom + (Raylib.IsKeyDown(KeyboardKey.E) - Raylib.IsKeyDown(KeyboardKey.Q))
-                * Raylib.GetFrameTime(), 0.01f, 10f);
+                * Raylib.GetFrameTime(), 0.1f, 5f);
         }
         CalculateVelocity();
         CameraBody.Target += Velocity;
