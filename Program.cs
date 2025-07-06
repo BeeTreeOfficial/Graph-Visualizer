@@ -6,6 +6,7 @@ using DijkstraAlgorithm.Graphs;
 using DijkstraAlgorithm.Graphs.Points;
 using DijkstraAlgorithm.CommandLines;
 using DijkstraAlgorithm.Commands;
+using DijkstraAlgorithm.Persistence;
 
 namespace DijkstraAlgorithm;
 public class Program
@@ -13,14 +14,14 @@ public class Program
     private static Graph graph = new();
     public static Graph Graph { get { return graph; } }
     public static Point? SelectedPoint = null;
-    public static FlyingCamera Camera = new(new(0, 0), 1, 1);
+    public static Camera Camera = new(1000);
     public static CommandLine commandLine = new();
     public static CommandDeque commandDeque = new();
     public static void Main()
     {   
         Draw.Drawing.Init(1100, 800);
         Console.Clear();
-        Persistence.Load.LoadFromFile("RECENT");
+        Storage.Load("RECENT");
         while (!Raylib.WindowShouldClose())
         {
             commandLine.Update();
@@ -32,9 +33,9 @@ public class Program
                 SelectedPoint?.Update();
                 Camera.Update();
             }
-            Draw.Drawing.Draw(graph, SelectedPoint, commandLine, Camera.GetBody());
+            Draw.Drawing.Draw(graph, SelectedPoint, commandLine, Camera.Body);
         }
-        Persistence.Save.SaveGraphTo(graph, "Recent");
+        Storage.Save(graph, "Recent");
     }
 
 

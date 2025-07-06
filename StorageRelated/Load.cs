@@ -3,13 +3,13 @@ using DijkstraAlgorithm.Graphs;
 using Raylib_cs;
 
 namespace DijkstraAlgorithm.Persistence;
-public class Load
+public partial class Storage
 {
-    public static void LoadFromFile(string pathToFileToLoadFrom)
+    public static void Load(string path)
     {
         Program.commandDeque.Execute(new CommandClearGraph());
-        if (!File.Exists(pathToFileToLoadFrom)) return;
-        string DataRetreived = File.ReadAllText(pathToFileToLoadFrom);
+        if (!File.Exists(path)) return;
+        string DataRetreived = File.ReadAllText(path);
         string[] Content = DataRetreived.Split("\n");
         foreach (var Line in Content)
         {

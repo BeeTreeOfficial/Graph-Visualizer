@@ -1,6 +1,7 @@
 ﻿using DijkstraAlgorithm.Mathematics;
 using DijkstraAlgorithm.Graphs;
 using DijkstraAlgorithm.Commands.DerivedCommands;
+using DijkstraAlgorithm.Persistence;
 
 namespace DijkstraAlgorithm.CommandLines;
 
@@ -27,10 +28,10 @@ internal class CommandsParser
             switch (commands.Length)
             {
                 case 2:
-                    Program.commandDeque.Execute(new CommandAddPoint(commands[1], null, Program.Camera.GetBody().Target));
+                    Program.commandDeque.Execute(new CommandAddPoint(commands[1], null, Program.Camera.Body.Target));
                     break;
                 case 3:
-                    Program.commandDeque.Execute(new CommandAddPoint(commands[1], commands[2], Program.Camera.GetBody().Target));
+                    Program.commandDeque.Execute(new CommandAddPoint(commands[1], commands[2], Program.Camera.Body.Target));
                     break;
                 default:
                     break;
@@ -83,11 +84,11 @@ internal class CommandsParser
         }
         else if (commands.Contains("SAVE") && commands.Length >= 2)
         {
-            Persistence.Save.SaveGraphTo(graph, commands[1]);
+            Storage.Save(graph, commands[1]);
         }
         else if (commands.Contains("LOAD") && commands.Length >= 2)
         {
-            Persistence.Load.LoadFromFile(commands[1]);
+            Storage.Load(commands[1]);
             Console.WriteLine(graph.Points);
         }
         else if (commands.Contains("NEW"))
