@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace DijkstraAlgorithm.Graphs;
+namespace DijkstraAlgorithm.Graphs.Interfaces;
 
 public interface IPosition
 {

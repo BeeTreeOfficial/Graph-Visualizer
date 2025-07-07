@@ -1,6 +1,7 @@
 ﻿using Raylib_cs;
 using DijkstraAlgorithm.Graphs.Edges;
 using System.Numerics;
+using DijkstraAlgorithm.Graphs.Interfaces;
 
 namespace DijkstraAlgorithm.Graphs.Points;
 public partial class Point : IPoint

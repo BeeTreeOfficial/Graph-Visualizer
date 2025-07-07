@@ -1,6 +1,4 @@
-﻿
-
-namespace DijkstraAlgorithm.Graphs.Points;
+﻿namespace DijkstraAlgorithm.Graphs.Interfaces;
 
 public interface IPoint: IPosition
 {

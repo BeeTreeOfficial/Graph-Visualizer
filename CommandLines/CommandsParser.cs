@@ -3,6 +3,7 @@ using DijkstraAlgorithm.Graphs;
 using DijkstraAlgorithm.Commands.DerivedCommands;
 using DijkstraAlgorithm.Persistence;
 using DijkstraAlgorithm.Graphs.Points;
+using DijkstraAlgorithm.Graphs.Interfaces;
 
 namespace DijkstraAlgorithm.CommandLines;
 

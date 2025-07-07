@@ -1,10 +1,5 @@
 ﻿using Raylib_cs;
 
-using DijkstraAlgorithm.Cameras;
-using DijkstraAlgorithm.Graphs;
-using DijkstraAlgorithm.Graphs.Points;
-using DijkstraAlgorithm.CommandLines;
-using DijkstraAlgorithm.Commands;
 using DijkstraAlgorithm.Draw;
 using DijkstraAlgorithm.Persistence;
 
@@ -20,14 +15,12 @@ public class Program
 
         string DefaultSaveFile = "Recent";
 
-        float CameraSpeed = 1;
+        float CameraSpeed = 2;
 
         Drawing.Init(WindowWidth, WindowHeight, TargetFps);
         Console.Clear();
 
-        State CurrentState = new();
-        CurrentState.Camera.Speed = CameraSpeed;
-        CurrentState = Storage.Load(DefaultSaveFile);
+        State CurrentState = Storage.Load(DefaultSaveFile, CameraSpeed);
         while (!Raylib.WindowShouldClose())
         {
             KeyboardKey pressedKey = (KeyboardKey)Raylib.GetKeyPressed();

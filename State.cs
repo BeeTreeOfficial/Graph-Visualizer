@@ -3,6 +3,7 @@ using DijkstraAlgorithm.Cameras;
 using DijkstraAlgorithm.CommandLines;
 using DijkstraAlgorithm.Commands;
 using DijkstraAlgorithm.Graphs.Points;
+using DijkstraAlgorithm.Graphs.Interfaces;
 
 namespace DijkstraAlgorithm;
 
@@ -14,7 +15,11 @@ public class State
         SelectedPoint = EmptyPoint.Instance;
         CommandLine = new CommandLine();
         CommandDeque = new CommandDeque();
-        Camera = new Camera(1);
+        Camera ??= new Camera(100);
+    }
+    public State(float Speed = 1): this()
+    {
+        Camera = new Camera(Speed);
     }
     public Graph Graph { get; set; }
     public IPoint SelectedPoint { get; set; }

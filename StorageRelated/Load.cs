@@ -1,15 +1,14 @@
 ﻿using Raylib_cs;
 
 using DijkstraAlgorithm.Commands.DerivedCommands;
-using DijkstraAlgorithm.Graphs;
 
 namespace DijkstraAlgorithm.Persistence;
 public partial class Storage
 {
-    public static State Load(string path)
+    public static State Load(string path, float CameraSpeed = 1000)
     {
         State LoadedState = new();
-        LoadedState.Camera.Speed = 300;
+        LoadedState.Camera.MaxSpeed = CameraSpeed;
         if (!File.Exists(path)) return LoadedState;
         string DataRetreived = File.ReadAllText(path);
         string[] Content = DataRetreived.Split("\n");
@@ -30,6 +29,11 @@ public partial class Storage
             if (Arguments[0] == "Edge:" && Arguments.Length >= 3)
             {
                 LoadedState.CommandDeque.Execute(new CommandCreateConnection(Arguments[1], Arguments[2]), LoadedState);
+            }
+            if (Arguments[0] == "Camera:" && Arguments.Length >= 4)
+            {
+                LoadedState.Camera.MaxSpeed = float.Parse(Arguments[1]);
+                LoadedState.Camera.Position = new(float.Parse(Arguments[2]), float.Parse(Arguments[3]));
             }
         }
         return LoadedState;

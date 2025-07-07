@@ -1,8 +1,4 @@
-﻿using DijkstraAlgorithm.Graphs;
-using DijkstraAlgorithm.Graphs.Points;
-using DijkstraAlgorithm.Graphs.Edges;
-using Raylib_cs;
-
+﻿using DijkstraAlgorithm.Graphs.Points;
 namespace DijkstraAlgorithm.Persistence;
 
 public partial class Storage
@@ -18,6 +14,7 @@ public partial class Storage
         {
             Content.Add($"Edge: {Edges.Key.Item1} {Edges.Key.Item2}");
         }
+        Content.Add($"Camera: {State.Camera.MaxSpeed} {State.Camera.Position.X} {State.Camera.Position.Y}");
         string ContentString = string.Empty;
         foreach (var Line in Content)
         {
