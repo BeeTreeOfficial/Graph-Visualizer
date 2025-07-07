@@ -22,11 +22,15 @@ public class Program
         int WindowWidth = 1100;
         int WindowHeight = 800;
 
-        string DefaultSave = "Recent";
+        int TargetFps = 500;
 
-        Drawing.Init(WindowWidth, WindowHeight);
+        string DefaultSaveFile = "Recent";
+
+        float CameraSpeed = 1;
+
+        Drawing.Init(WindowWidth, WindowHeight, TargetFps);
         Console.Clear();
-        Storage.Load(DefaultSave);
+        Storage.Load(DefaultSaveFile);
 
         while (!Raylib.WindowShouldClose())
         {
@@ -41,6 +45,6 @@ public class Program
             }
             Drawing.Draw(graph, SelectedPoint, commandLine, Camera.Body);
         }
-        Storage.Save(DefaultSave, graph);
+        Storage.Save(DefaultSaveFile, graph);
     }
 }

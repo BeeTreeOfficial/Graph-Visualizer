@@ -23,17 +23,22 @@ public partial class Point
     }
     private void UpdateRadius()
     {
-        Radius = 15;
+        Radius = 1;
         if (ConnectedEdges.Count <= 0) return;
-        int MaxSize = 0;
+        int MinSize = 0;
         if (ConnectedEdges.Count > 0)
         {
             foreach (var (_, Edge) in ConnectedEdges)
             {
                 Radius += (int)Edge.Length / 25;
+                int Thickness = (int)Edge.Thickness;
+                if (Thickness > MinSize)
+                {
+                    MinSize = Thickness;
+                }
             }
         }
         Radius /= ConnectedEdges.Count;
-        Radius = Math.Max(MaxSize, Radius);
+        Radius = Math.Clamp(Radius, MinSize, 60);
     }
 }

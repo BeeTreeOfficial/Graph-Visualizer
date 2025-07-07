@@ -9,9 +9,10 @@ namespace DijkstraAlgorithm.Draw;
 internal static class Drawing
 {
     private static Color BackgroundColor = new(40, 40, 40);
-    public static void Init(int x, int y)
+    public static void Init(int x, int y, int TargetFps = 10000)
     {
         Raylib.InitWindow(x, y, "Dijkstra Algorithm");
+        Raylib.SetTargetFPS(TargetFps);
     }
     public static void Draw(Graph Graph, IPoint SelectedPoint, CommandLine commandLine, Camera2D Camera)
     {
