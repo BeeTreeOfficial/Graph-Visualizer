@@ -10,17 +10,18 @@ public class Program
     {
         int WindowWidth = 1100;
         int WindowHeight = 800;
+        
+        int TargetFps = 144; // Max fps cap
 
-        int TargetFps = 5000;
+        string DefaultSaveFile = "Recent"; // File where the game autosaves
 
-        string DefaultSaveFile = "Recent";
-
-        float CameraSpeed = 2;
+        float DefaultCameraSpeed = 1000; // Default Speed if Another is not Specified
 
         Drawing.Init(WindowWidth, WindowHeight, TargetFps);
         Console.Clear();
 
-        State CurrentState = Storage.Load(DefaultSaveFile, CameraSpeed);
+        State CurrentState = Storage.Load(DefaultSaveFile, DefaultCameraSpeed);
+        Raylib.SetWindowState(ConfigFlags.ResizableWindow);
         while (!Raylib.WindowShouldClose())
         {
             KeyboardKey pressedKey = (KeyboardKey)Raylib.GetKeyPressed();

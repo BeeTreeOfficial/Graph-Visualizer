@@ -26,6 +26,8 @@ public class Camera: ICamera
     }
     public void Update()
     {
+        body.Offset.X = Raylib.GetScreenWidth() / 2;
+        body.Offset.Y = Raylib.GetScreenHeight() / 2;
         ZoomUpdate();
         Vector2 Direction = Vector2.Zero;
         Direction.X = Raylib.IsKeyDown(KeyboardKey.D) - Raylib.IsKeyDown(KeyboardKey.A);

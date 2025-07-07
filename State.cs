@@ -17,7 +17,7 @@ public class State
         CommandDeque = new CommandDeque();
         Camera ??= new Camera(100);
     }
-    public State(float Speed = 1): this()
+    public State(float Speed = 100) : this()
     {
         Camera = new Camera(Speed);
     }

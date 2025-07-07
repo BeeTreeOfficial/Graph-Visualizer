@@ -23,7 +23,7 @@ public partial class Point
     }
     private void UpdateRadius()
     {
-        Radius = 1;
+        Radius = 6;
         if (ConnectedEdges.Count <= 0) return;
         int MinSize = 0;
         if (ConnectedEdges.Count > 0)
