@@ -1,21 +1,17 @@
 ﻿namespace DijkstraAlgorithm.Commands.DerivedCommands;
 
-public class CommandCreateConnection : ICommand
+public class CommandCreateConnection(string from, string to) : ICommand
 {
-    private readonly string from;
-    private readonly string to;
-    public CommandCreateConnection(string from, string to)
+    private readonly string from = from;
+    private readonly string to = to;
+
+    public void Execute(State State)
     {
-        this.from = from;
-        this.to = to;
-    }
-    public void Execute()
-    {
-        Program.Graph.CreateConnection(from,to);
+        State.Graph.CreateConnection(from,to);
     }
 
-    public void Undo()
+    public void Undo(State State)
     {
-        Program.Graph.RemoveEdgeByName(from, to);
+        State.Graph.RemoveEdgeByName(from, to);
     }
 }

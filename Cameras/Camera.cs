@@ -5,15 +5,16 @@ namespace DijkstraAlgorithm.Cameras;
 
 public class Camera: ICamera
 {
-    public Camera(float Speed)
+    public Camera(float CameraSpeed)
     {
-        this.Speed = Speed;
+        Speed = CameraSpeed;
         body = new Camera2D();
         body.Offset.X = Raylib.GetScreenWidth() / 2;
         body.Offset.Y = Raylib.GetScreenHeight() / 2;
         body.Zoom = 1;
     }
-    private float Speed;
+
+    public float Speed { get;  set; }
     private Vector2 Velocity;
     private Camera2D body;
     public Camera2D Body { get { return body; } }

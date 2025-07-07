@@ -5,12 +5,12 @@ namespace DijkstraAlgorithm.Commands.DerivedCommands;
 
 public class CommandConnectNearest : ICommand
 {
-    public void Execute()
+    public void Execute(State State)
     {
 
     }
 
-    public void Undo()
+    public void Undo(State State)
     {
         throw new NotImplementedException();
     }

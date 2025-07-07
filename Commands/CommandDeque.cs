@@ -9,16 +9,16 @@ public class CommandDeque
     {
         Commands = [];
     }
-    public  void Execute(ICommand command)
+    public  void Execute(ICommand command, State State)
     {
         if (Commands.Count > 256) Commands.RemoveFirst();
         Commands.AddLast(command);
-        command.Execute();
+        command.Execute(State);
     }
-    public void Undo()
+    public void Undo(State State)
     {
         if (Commands.Count <= 0) return;
-        Commands.Last().Undo();
+        Commands.Last().Undo(State);
         Commands.RemoveLast();
     }
 }

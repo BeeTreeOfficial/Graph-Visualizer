@@ -6,21 +6,19 @@ namespace DijkstraAlgorithm.Commands.DerivedCommands;
 
 public class CommandClearGraph : ICommand
 {
-    Dictionary<string, Point> PreviousPoints;
-    Dictionary<(string, string), Edge> PreviousEdges;
-    public CommandClearGraph()
+    Dictionary<string, Point> PreviousPoints = [];
+    Dictionary<(string, string), Edge> PreviousEdges = [];
+
+    public void Execute(State State)
     {
-        PreviousPoints = Program.Graph.points;
-        PreviousEdges = Program.Graph.edges;
-    }
-    public void Execute()
-    {
-        Program.Graph.Clear();
+        PreviousPoints = State.Graph.points;
+        PreviousEdges = State.Graph.edges;
+        State.Graph.Clear();
     }
 
-    public void Undo()
+    public void Undo(State State)
     {
-        Program.Graph.points = PreviousPoints;
-        Program.Graph.edges = PreviousEdges;
+        State.Graph.points = PreviousPoints;
+        State.Graph.edges = PreviousEdges;
     }
 }

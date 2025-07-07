@@ -2,16 +2,16 @@
 
 namespace DijkstraAlgorithm.Commands.DerivedCommands;
 
-public class CommandDeletePoint : ICommand
+public class CommandDeletePoint(string Name) : ICommand
 {
-    string NameOfPointToRemove;
-    public CommandDeletePoint(string Name) { NameOfPointToRemove = Name; }
-    public void Execute()
+    readonly string NameOfPointToRemove = Name;
+
+    public void Execute(State State)
     {
-        Program.SelectedPoint = EmptyPoint.Instance;
-        Program.Graph.RemovePoint(NameOfPointToRemove);
+        State.SelectedPoint = EmptyPoint.Instance;
+        State.Graph.RemovePoint(NameOfPointToRemove);
     }
-    public void Undo()
+    public void Undo(State State)
     {
     }
 }

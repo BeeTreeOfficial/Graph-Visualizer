@@ -8,15 +8,15 @@ namespace DijkstraAlgorithm.CommandLines;
 
 internal class CommandsParser
 {
-    public static void Execute(ref string buffer, ref bool IsTyping)
+    public static void Execute(ref string buffer, ref bool IsTyping, State State)
     {
-        Graph graph = Program.Graph;
+        Graph graph = State.Graph;
         string[] commands = buffer.Split(" ");
         if (commands.Contains("DEL"))
         {
             if (commands.Length == 2)
             {
-                Program.commandDeque.Execute(new CommandDeletePoint(commands[1]));
+                State.CommandDeque.Execute(new CommandDeletePoint(commands[1]), State);
                 
             }
             else if (commands.Length == 3)
@@ -29,10 +29,10 @@ internal class CommandsParser
             switch (commands.Length)
             {
                 case 2:
-                    Program.commandDeque.Execute(new CommandAddPoint(commands[1], null, Program.Camera.Body.Target));
+                    State.CommandDeque.Execute(new CommandAddPoint(commands[1], null, State.Camera.Body.Target), State);
                     break;
                 case 3:
-                    Program.commandDeque.Execute(new CommandAddPoint(commands[1], commands[2], Program.Camera.Body.Target));
+                    State.CommandDeque.Execute(new CommandAddPoint(commands[1], commands[2], State.Camera.Body.Target), State);
                     break;
                 default:
                     break;
@@ -43,7 +43,7 @@ internal class CommandsParser
             switch (commands.Length)
             {
                 case 3:
-                    Program.commandDeque.Execute(new CommandCreateConnection(commands[1], commands[2]));
+                    State.CommandDeque.Execute(new CommandCreateConnection(commands[1], commands[2]), State);
                     break;
                 default:
                     break;
@@ -70,12 +70,12 @@ internal class CommandsParser
         {
             if (commands.Length == 1)
             {
-                Program.SelectedPoint = EmptyPoint.Instance;
+                State.SelectedPoint = EmptyPoint.Instance;
             }
             else
             {
                 IPoint? point = graph.GetPoint(commands[1]);
-                if (point != null) Program.SelectedPoint = point;
+                if (point != null) State.SelectedPoint = point;
             }
             IsTyping = false;
         }
@@ -86,7 +86,7 @@ internal class CommandsParser
         }
         else if (commands.Contains("SAVE") && commands.Length >= 2)
         {
-            Storage.Save(commands[1], graph);
+            Storage.Save(commands[1], State);
         }
         else if (commands.Contains("LOAD") && commands.Length >= 2)
         {
@@ -95,11 +95,11 @@ internal class CommandsParser
         }
         else if (commands.Contains("NEW"))
         {
-            Program.commandDeque.Execute(new CommandClearGraph());
+            State.CommandDeque.Execute(new CommandClearGraph(), State);
         }
         else if (commands.Contains("UNDO"))
         {
-            Program.commandDeque.Undo();
+            State.CommandDeque.Undo(State);
         }
             buffer = "";
 

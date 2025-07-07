@@ -4,18 +4,15 @@ using DijkstraAlgorithm.Structs;
 
 namespace DijkstraAlgorithm.Commands.DerivedCommands;
 
-public class CommandSolveDextra : ICommand
+public class CommandSolveDextra(string Begin) : ICommand
 {
-    Result Result;
-    public CommandSolveDextra(Graph graph, string Begin)
+    readonly string Begin = Begin;
+    public void Execute(State State)
     {
-        Result = Dijkstra.Solve(graph, Begin);
+        Result Result = Dijkstra.Solve(State.Graph, Begin);
+        Console.WriteLine(Result);
     }
-    public void Execute()
-    {
-        
-    }
-    public void Undo()
+    public void Undo(State State)
     {
         throw new NotImplementedException();
     }

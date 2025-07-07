@@ -7,14 +7,14 @@ namespace DijkstraAlgorithm.Persistence;
 
 public partial class Storage
 {
-    public static void Save(string NameOfFileToSafeTo, Graph graph)
+    public static void Save(string NameOfFileToSafeTo, State State)
     {
         List<string> Content = []; 
-        foreach (var (Name, Point) in graph.Points)
+        foreach (var (Name, Point) in State.Graph.Points)
         {
             Content.Add($"Point: {Name} {Point.Position.X} {Point.Position.Y} {Point.Color}");       
         }
-        foreach (var Edges in graph.edges)
+        foreach (var Edges in State.Graph.edges)
         {
             Content.Add($"Edge: {Edges.Key.Item1} {Edges.Key.Item2}");
         }

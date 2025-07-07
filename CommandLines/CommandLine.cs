@@ -7,14 +7,14 @@ public class CommandLine
     public bool IsTyping = false;
     public string buffer = "";
     public readonly HashSet<KeyboardKey> SpecialKeys = [KeyboardKey.Enter, KeyboardKey.LeftShift, KeyboardKey.Backspace, KeyboardKey.Space, KeyboardKey.Tab];
-    private void ConsoleWrite(KeyboardKey pressedKey)
+    private void ConsoleWrite(KeyboardKey pressedKey, State State)
     {
         if (pressedKey == KeyboardKey.Tab) IsTyping = !IsTyping;
         if (!IsTyping || pressedKey == KeyboardKey.Null) return;
         switch (pressedKey)
         {
             case KeyboardKey.Enter:
-                CommandsParser.Execute(ref buffer, ref IsTyping);
+                CommandsParser.Execute(ref buffer, ref IsTyping, State);
                 buffer = "";
                 break;
             case KeyboardKey.Space:
@@ -31,9 +31,9 @@ public class CommandLine
         }
 
     }
-    public void Update()
+    public void Update(KeyboardKey KeyPressed, State State)
     {
-        ConsoleWrite((KeyboardKey)Raylib.GetKeyPressed());
+        ConsoleWrite(KeyPressed, State);
     }
     public void Draw()
     {

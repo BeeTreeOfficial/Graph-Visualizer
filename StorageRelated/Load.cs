@@ -6,10 +6,11 @@ using DijkstraAlgorithm.Graphs;
 namespace DijkstraAlgorithm.Persistence;
 public partial class Storage
 {
-    public static void Load(string path)
+    public static State Load(string path)
     {
-        Program.commandDeque.Execute(new CommandClearGraph());
-        if (!File.Exists(path)) return;
+        State LoadedState = new();
+        LoadedState.Camera.Speed = 300;
+        if (!File.Exists(path)) return LoadedState;
         string DataRetreived = File.ReadAllText(path);
         string[] Content = DataRetreived.Split("\n");
         foreach (var Line in Content)
@@ -24,12 +25,13 @@ public partial class Storage
                 color.R = (byte)float.Parse(Arguments[4][3..]);
                 color.G = (byte)float.Parse(Arguments[5][2..]);
                 color.B = (byte)float.Parse(Arguments[6][2..]);
-                Program.commandDeque.Execute(new CommandAddPoint(Name, color, new(x, y)));
+                LoadedState.CommandDeque.Execute(new CommandAddPoint(Name, color, new(x, y)), LoadedState);
             }
             if (Arguments[0] == "Edge:" && Arguments.Length >= 3)
             {
-                Program.commandDeque.Execute(new CommandCreateConnection(Arguments[1], Arguments[2]));
+                LoadedState.CommandDeque.Execute(new CommandCreateConnection(Arguments[1], Arguments[2]), LoadedState);
             }
         }
+        return LoadedState;
     }
 }

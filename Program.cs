@@ -11,18 +11,12 @@ using DijkstraAlgorithm.Persistence;
 namespace DijkstraAlgorithm;
 public class Program
 {
-    private static Graph graph = new();
-    public static Graph Graph { get { return graph; } }
-    public static IPoint SelectedPoint = EmptyPoint.Instance;
-    public static Camera Camera = new(1000);
-    public static CommandLine commandLine = new();
-    public static CommandDeque commandDeque = new();
     public static void Main()
     {
         int WindowWidth = 1100;
         int WindowHeight = 800;
 
-        int TargetFps = 500;
+        int TargetFps = 5000;
 
         string DefaultSaveFile = "Recent";
 
@@ -30,21 +24,25 @@ public class Program
 
         Drawing.Init(WindowWidth, WindowHeight, TargetFps);
         Console.Clear();
-        Storage.Load(DefaultSaveFile);
 
+        State CurrentState = new();
+        CurrentState.Camera.Speed = CameraSpeed;
+        CurrentState = Storage.Load(DefaultSaveFile);
         while (!Raylib.WindowShouldClose())
         {
-            commandLine.Update();
             KeyboardKey pressedKey = (KeyboardKey)Raylib.GetKeyPressed();
-            if (!commandLine.IsTyping)
+            CurrentState.CommandLine.Update(pressedKey, CurrentState);
+            if (!CurrentState.CommandLine.IsTyping)
             {
-                if (pressedKey == KeyboardKey.Z) commandDeque.Undo();
+                if (pressedKey == KeyboardKey.Z) CurrentState.CommandDeque.Undo(CurrentState);
                 if (pressedKey == KeyboardKey.F) Drawing.ToggleFullScreen();
-                SelectedPoint.Update();
-                Camera.Update();
+                CurrentState.SelectedPoint.Update();
+                CurrentState.Camera.Update();
             }
-            Drawing.Draw(graph, SelectedPoint, commandLine, Camera.Body);
+            Drawing.Draw(CurrentState);
         }
-        Storage.Save(DefaultSaveFile, graph);
+        Storage.Save(DefaultSaveFile, CurrentState);
+
+
     }
 }
