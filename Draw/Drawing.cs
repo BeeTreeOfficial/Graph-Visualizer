@@ -13,13 +13,13 @@ internal static class Drawing
     {
         Raylib.InitWindow(x, y, "Dijkstra Algorithm");
     }
-    public static void Draw(Graph Graph, Point? SelectedPoint, CommandLine commandLine, Camera2D Camera)
+    public static void Draw(Graph Graph, IPoint SelectedPoint, CommandLine commandLine, Camera2D Camera)
     {
         Raylib.BeginDrawing();
         Raylib.ClearBackground(BackgroundColor);
         Raylib.BeginMode2D(Camera);
         Graph.Draw();
-        SelectedPoint?.DrawHighlight();
+        SelectedPoint.DrawHighlight();
         Raylib.EndMode2D();
         commandLine.Draw();
         Raylib.DrawFPS(5, 5);

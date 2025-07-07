@@ -2,6 +2,7 @@
 using DijkstraAlgorithm.Graphs;
 using DijkstraAlgorithm.Commands.DerivedCommands;
 using DijkstraAlgorithm.Persistence;
+using DijkstraAlgorithm.Graphs.Points;
 
 namespace DijkstraAlgorithm.CommandLines;
 
@@ -15,7 +16,7 @@ internal class CommandsParser
         {
             if (commands.Length == 2)
             {
-                graph.RemovePoint(commands[1]);
+                Program.commandDeque.Execute(new CommandDeletePoint(commands[1]));
                 
             }
             else if (commands.Length == 3)
@@ -69,11 +70,12 @@ internal class CommandsParser
         {
             if (commands.Length == 1)
             {
-                Program.SelectedPoint = null;
+                Program.SelectedPoint = EmptyPoint.Instance;
             }
             else
             {
-                Program.SelectedPoint = graph.GetPoint(commands[1]);
+                IPoint? point = graph.GetPoint(commands[1]);
+                if (point != null) Program.SelectedPoint = point;
             }
             IsTyping = false;
         }
@@ -95,21 +97,7 @@ internal class CommandsParser
         {
             Program.commandDeque.Execute(new CommandClearGraph());
         }
-        else if (commands.Contains("ABC"))
-        {
-            graph.AddToPoints(new("A"));
-            graph.AddToPoints(new("B"));
-            graph.AddToPoints(new("C"));
-            graph.AddToPoints(new("D"));
-            graph.AddToPoints(new("E"));
-            graph.CreateConnection("A", "B");
-            graph.CreateConnection("A", "C");
-            graph.CreateConnection("A", "D");
-            graph.CreateConnection("B", "C");
-            graph.CreateConnection("D", "E");
-            graph.Shuffle();
-            Program.SelectedPoint = null;
-        } else if (commands.Contains("UNDO"))
+        else if (commands.Contains("UNDO"))
         {
             Program.commandDeque.Undo();
         }

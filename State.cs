@@ -9,7 +9,7 @@ namespace DijkstraAlgorithm;
 public class State
 {
     private Graph graph;
-    public Point? selectedPoint;
+    public Point selectedPoint;
     public ICamera camera;
     public CommandLine commandLine;
     public CommandDeque commandDeque;

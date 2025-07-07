@@ -3,7 +3,7 @@ using DijkstraAlgorithm.Graphs.Edges;
 using System.Numerics;
 
 namespace DijkstraAlgorithm.Graphs.Points;
-public partial class Point: IPosition
+public partial class Point : IPoint
 {
     public string Name;
     private Vector2 Velocity = Vector2.Zero;

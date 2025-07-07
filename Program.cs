@@ -13,7 +13,7 @@ public class Program
 {
     private static Graph graph = new();
     public static Graph Graph { get { return graph; } }
-    public static Point? SelectedPoint = null;
+    public static IPoint SelectedPoint = EmptyPoint.Instance;
     public static Camera Camera = new(1000);
     public static CommandLine commandLine = new();
     public static CommandDeque commandDeque = new();
@@ -34,9 +34,9 @@ public class Program
             KeyboardKey pressedKey = (KeyboardKey)Raylib.GetKeyPressed();
             if (!commandLine.IsTyping)
             {
-                if (Raylib.IsKeyPressed(KeyboardKey.Z)) commandDeque.Undo();
-                if (pressedKey == KeyboardKey.F) Draw.Drawing.ToggleFullScreen();
-                SelectedPoint?.Update();
+                if (pressedKey == KeyboardKey.Z) commandDeque.Undo();
+                if (pressedKey == KeyboardKey.F) Drawing.ToggleFullScreen();
+                SelectedPoint.Update();
                 Camera.Update();
             }
             Drawing.Draw(graph, SelectedPoint, commandLine, Camera.Body);
