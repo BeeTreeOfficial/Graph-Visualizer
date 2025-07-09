@@ -1,4 +1,4 @@
-﻿using DijkstraAlgorithm.Graphs.Interfaces;
+﻿using DijkstraAlgorithm.Interfaces;
 using System.Numerics;
 
 namespace DijkstraAlgorithm.Graphs.Points;

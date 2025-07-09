@@ -6,12 +6,9 @@ namespace DijkstraAlgorithm.Draw;
 
 public static class Drawer
 {
-    private static Texture2D DotTexure = Raylib.LoadTextureFromImage(Raylib.LoadImage("Dot.png"));
-    private static Rectangle SourceBounds = new(0,0, DotTexure.Width, DotTexure.Height);
-    public static void DrawCircle(Vector2 Position, int Radius, Color color)
+    public static void DrawCircle(Vector2 Position, int Radius, Color Color)
     {
-        float Width = (float)Radius / 20;
-        Raylib.DrawTexturePro(DotTexure,SourceBounds, new(Position.X - Radius,Position.Y - Radius, Radius * 2, Radius * 2), Vector2.Zero, 0, color);
+        Raylib.DrawCircle((int)Position.X, (int)Position.Y, Radius, Color);
     }
     public static void DrawCircleLines(Vector2 Position, int RadiusColor, Color Color)
     {

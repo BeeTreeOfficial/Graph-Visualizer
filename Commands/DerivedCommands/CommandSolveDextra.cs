@@ -1,6 +1,6 @@
 ﻿using DijkstraAlgorithm.Graphs;
 using DijkstraAlgorithm.Mathematics;
-using DijkstraAlgorithm.Structs;
+using DijkstraAlgorithm.ResultClasses;
 
 namespace DijkstraAlgorithm.Commands.DerivedCommands;
 

@@ -1,6 +1,6 @@
 ﻿using DijkstraAlgorithm.Graphs;
 using DijkstraAlgorithm.Graphs.Points;
-using DijkstraAlgorithm.Structs;
+using DijkstraAlgorithm.ResultClasses;
 
 namespace DijkstraAlgorithm.Mathematics;
 public class Dijkstra(Graph graph)

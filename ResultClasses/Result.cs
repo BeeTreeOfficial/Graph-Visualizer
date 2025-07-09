@@ -1,5 +1,5 @@
 ﻿
-namespace DijkstraAlgorithm.Structs;
+namespace DijkstraAlgorithm.ResultClasses;
 
 public class Result : IFormattable
 {

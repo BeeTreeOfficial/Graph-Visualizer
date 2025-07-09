@@ -11,7 +11,7 @@ public class Program
         int WindowWidth = 1100;
         int WindowHeight = 800;
         
-        int TargetFps = 144; // Max fps cap
+        int TargetFps = 10000; // Max fps cap
 
         string DefaultSaveFile = "Recent"; // File where the game autosaves
 

@@ -3,16 +3,17 @@ using DijkstraAlgorithm.Graphs;
 using DijkstraAlgorithm.Commands.DerivedCommands;
 using DijkstraAlgorithm.Persistence;
 using DijkstraAlgorithm.Graphs.Points;
-using DijkstraAlgorithm.Graphs.Interfaces;
+using System.Text;
+using DijkstraAlgorithm.Interfaces;
 
 namespace DijkstraAlgorithm.CommandLines;
 
 internal class CommandsParser
 {
-    public static void Execute(ref string buffer, ref bool IsTyping, State State)
+    public static void Execute(StringBuilder buffer, ref bool IsTyping, State State)
     {
         Graph graph = State.Graph;
-        string[] commands = buffer.Split(" ");
+        string[] commands = buffer.ToString().Split(" ");
         if (commands.Contains("DEL"))
         {
             if (commands.Length == 2)
@@ -102,7 +103,7 @@ internal class CommandsParser
         {
             State.CommandDeque.Undo(State);
         }
-            buffer = "";
+        buffer.Clear();
 
     }
 }

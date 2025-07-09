@@ -3,7 +3,7 @@ using DijkstraAlgorithm.Cameras;
 using DijkstraAlgorithm.CommandLines;
 using DijkstraAlgorithm.Commands;
 using DijkstraAlgorithm.Graphs.Points;
-using DijkstraAlgorithm.Graphs.Interfaces;
+using DijkstraAlgorithm.Interfaces;
 
 namespace DijkstraAlgorithm;
 

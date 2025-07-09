@@ -1,5 +1,4 @@
-﻿
-using DijkstraAlgorithm.Draw;
+﻿using DijkstraAlgorithm.Draw;
 using DijkstraAlgorithm.Graphs.Edges;
 using Raylib_cs;
 
@@ -9,7 +8,7 @@ public partial class Point
 {
     private Color color = Color.Red;
     public Color Color { get { return color; } }
-    private int Radius = 15;
+    private int Radius;
     public void DrawHighlight()
     {
         Drawer.DrawCircleLines(Position, (int)(Radius * 2f), Raylib.ColorBrightness(color, 0.5f));
@@ -18,6 +17,7 @@ public partial class Point
     {
         Color TextColor = Raylib.ColorLerp(Color.White, Color, 0.2f);
         UpdateRadius();
+        Drawer.DrawCircle(Position, Radius + 3, Color.Black);
         Drawer.DrawCircle(Position, Radius, Color);
         Drawer.DrawTextWithOffset(Name, Position, Radius, Radius, TextColor);
     }
@@ -37,8 +37,8 @@ public partial class Point
                     MinSize = Thickness;
                 }
             }
+            Radius /= ConnectedEdges.Count;
         }
-        Radius /= ConnectedEdges.Count;
         Radius = Math.Clamp(Radius, MinSize, 60);
     }
 }

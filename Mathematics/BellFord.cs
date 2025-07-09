@@ -1,5 +1,5 @@
 ﻿using DijkstraAlgorithm.Graphs;
-using DijkstraAlgorithm.Structs;
+using DijkstraAlgorithm.ResultClasses;
 
 namespace DijkstraAlgorithm.Mathematics
 {

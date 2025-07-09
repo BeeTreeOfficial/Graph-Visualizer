@@ -1,4 +1,4 @@
-﻿namespace DijkstraAlgorithm.Structs;
+﻿namespace DijkstraAlgorithm.ResultClasses;
 
 public class ResultData(double Price, string? PreviousPoint)
 {
