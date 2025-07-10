@@ -24,7 +24,8 @@ public partial class Storage
                 color.R = (byte)float.Parse(Arguments[4][3..]);
                 color.G = (byte)float.Parse(Arguments[5][2..]);
                 color.B = (byte)float.Parse(Arguments[6][2..]);
-                LoadedState.CommandDeque.Execute(new CommandAddPoint(Name, color, new(x, y)), LoadedState);
+                if (Arguments.Length >= 9) LoadedState.CommandDeque.Execute(new CommandAddPoint(Name, color, new(x, y), Convert.ToInt32(Arguments[8])), LoadedState);
+                else LoadedState.CommandDeque.Execute(new CommandAddPoint(Name, color, new(x, y)), LoadedState);
             }
             if (Arguments[0] == "Edge:" && Arguments.Length >= 3)
             {

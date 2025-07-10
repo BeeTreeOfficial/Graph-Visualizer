@@ -5,68 +5,72 @@ using DijkstraAlgorithm.Graphs.Points;
 namespace DijkstraAlgorithm.Graphs;
 public partial class Graph
 {
-    public Dictionary<string, Point> points = [];
-    public Dictionary<(string, string), Edge> edges = [];
-    public Dictionary<string, Point> Points { get {return points;} }
+    public Dictionary<(string, string), Edge> Edges { get; private set;}
+    public Dictionary<string, Point> Points { get; private set; }
     public Point? GetPoint(string PointName)
     {
-        points.TryGetValue(PointName, out Point? point);
+        Points.TryGetValue(PointName, out Point? point);
         return point;
+    }
+    public Graph()
+    {
+        Points = [];
+        Edges = [];
     }
     public void CreateConnection(string from, string to, bool OneWay = false)
     {
-        if (!points.TryGetValue(from, out Point? PointFrom) || !points.TryGetValue(to, out Point? PointTo) || DoesThisKindOfConnectionExist(from, to) || from == to) return;
+        if (!Points.TryGetValue(from, out Point? PointFrom) || !Points.TryGetValue(to, out Point? PointTo) || DoesThisKindOfConnectionExist(from, to) || from == to) return;
         Edge edge = new(PointFrom, PointTo);
-        edges.Add((from, to), edge);
+        Edges.Add((from, to), edge);
         PointFrom.LinkToEdge(edge);
         if (OneWay) return;
         PointTo.LinkToEdge(edge);
     }
     public void AddToPoints(Point point)
     {
-        if (points.ContainsKey(point.Name))
+        if (Points.ContainsKey(point.Name))
         {
             Console.WriteLine("Attempted to add already existing point, " +
                 "or another point with the same name");
             return;
         }
-        points.Add(point.Name, point);
+        Points.Add(point.Name, point);
     }
     public void RemovePoint(string PointName)
     {
-        if (!points.TryGetValue(PointName, out Point? PointToDelete)) return;
+        if (!Points.TryGetValue(PointName, out Point? PointToDelete)) return;
         foreach (var item in PointToDelete.ConnectedEdges)
         {
             RemoveEdge(item.Value);
         }
-        points.Remove(PointName);
+        Points.Remove(PointName);
     }
     private void RemoveEdge(Edge EdgeToRemove)
     {
         EdgeToRemove.DetachFromBothPoints();
-        if (edges.ContainsKey((EdgeToRemove.Left.Name, EdgeToRemove.Right.Name)))
+        if (Edges.ContainsKey((EdgeToRemove.Left.Name, EdgeToRemove.Right.Name)))
         {
-            edges.Remove((EdgeToRemove.Left.Name, EdgeToRemove.Right.Name));
+            Edges.Remove((EdgeToRemove.Left.Name, EdgeToRemove.Right.Name));
         }
-        else if (edges.ContainsKey((EdgeToRemove.Right.Name, EdgeToRemove.Left.Name)))
+        else if (Edges.ContainsKey((EdgeToRemove.Right.Name, EdgeToRemove.Left.Name)))
         {
-            edges.Remove((EdgeToRemove.Right.Name, EdgeToRemove.Left.Name));
+            Edges.Remove((EdgeToRemove.Right.Name, EdgeToRemove.Left.Name));
         }
     }
     public void RemoveEdgeByName(string first, string second)
     {
-        if (edges.ContainsKey((first, second)))
+        if (Edges.ContainsKey((first, second)))
         {
-            RemoveEdge(edges[(first, second)]);
+            RemoveEdge(Edges[(first, second)]);
         }
-        else if (edges.ContainsKey((second, first)))
+        else if (Edges.ContainsKey((second, first)))
         {
-            RemoveEdge(edges[(second, first)]);
+            RemoveEdge(Edges[(second, first)]);
         }
     }
     private bool DoesThisKindOfConnectionExist(string first, string second)
     {
-        if (edges.ContainsKey((first, second)) || edges.ContainsKey((second, first)))
+        if (Edges.ContainsKey((first, second)) || Edges.ContainsKey((second, first)))
         {
             Console.WriteLine("This Connection Already Exists");
             return true;
@@ -76,15 +80,15 @@ public partial class Graph
 
     public void Shuffle()
     {
-        foreach (var item in points)
+        foreach (var item in Points)
         {
             item.Value.Shuffle();
         }
     }
     public void Clear()
     {
-        points = [];
-        edges = [];
+        Points = [];
+        Edges = [];
     }
 }
 

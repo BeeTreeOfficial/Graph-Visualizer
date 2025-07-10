@@ -8,9 +8,9 @@ public partial class Storage
         List<string> Content = []; 
         foreach (var (Name, Point) in State.Graph.Points)
         {
-            Content.Add($"Point: {Name} {Point.Position.X} {Point.Position.Y} {Point.Color}");       
+            Content.Add($"Point: {Name} {Point.Position.X} {Point.Position.Y} {Point.Color} {Point.Radius}");       
         }
-        foreach (var Edges in State.Graph.edges)
+        foreach (var Edges in State.Graph.Edges)
         {
             Content.Add($"Edge: {Edges.Key.Item1} {Edges.Key.Item2}");
         }

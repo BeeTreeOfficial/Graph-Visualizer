@@ -6,9 +6,9 @@ namespace DijkstraAlgorithm.Mathematics;
 public class Dijkstra(Graph graph)
 {
 
-    private HashSet<string> Visited = [];
-    private Result Sheet = new();
-    private readonly Dictionary<string, Point> points = graph.points;
+    private readonly HashSet<string> Visited = [];
+    private readonly Result Sheet = new();
+    private readonly Dictionary<string, Point> points = graph.Points;
     public static Result Solve(Graph Graph, string Name)
     {
         Dijkstra dijkstra = new(Graph);

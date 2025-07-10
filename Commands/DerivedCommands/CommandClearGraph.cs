@@ -11,14 +11,13 @@ public class CommandClearGraph : ICommand
 
     public void Execute(State State)
     {
-        PreviousPoints = State.Graph.points;
-        PreviousEdges = State.Graph.edges;
+        PreviousPoints = State.Graph.Points;
+        PreviousEdges = State.Graph.Edges;
         State.Graph.Clear();
     }
 
     public void Undo(State State)
     {
-        State.Graph.points = PreviousPoints;
-        State.Graph.edges = PreviousEdges;
+        
     }
 }

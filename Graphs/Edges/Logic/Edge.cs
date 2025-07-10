@@ -4,17 +4,12 @@ using System.Numerics;
 
 namespace DijkstraAlgorithm.Graphs.Edges;
 
-public partial class Edge
+public partial class Edge(Point Left, Point Right)
 {
-	public Edge(Point Left, Point Right)
-	{
-		this.Left = Left;
-		this.Right = Right;
-	}
-	public Point Left { get; private set; }
-	public Point Right { get; private set; }
+    public Point Left { get; private set; } = Left;
+    public Point Right { get; private set; } = Right;
 
-	public void DetachFromBothPoints()
+    public void DetachFromBothPoints()
 	{
 		Left.ConnectedEdges.Remove(Right.Name);
 		Right.ConnectedEdges.Remove(Left.Name);

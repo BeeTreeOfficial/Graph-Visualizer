@@ -6,7 +6,7 @@ namespace DijkstraAlgorithm.CommandLines;
 public class CommandLine
 {
     public bool IsTyping = false;
-    public StringBuilder buffer = new StringBuilder();
+    public StringBuilder buffer = new();
     public readonly HashSet<KeyboardKey> SpecialKeys = [KeyboardKey.Enter, KeyboardKey.LeftShift, KeyboardKey.Backspace, KeyboardKey.Space, KeyboardKey.Tab];
     private void ConsoleWrite(KeyboardKey pressedKey, State State)
     {

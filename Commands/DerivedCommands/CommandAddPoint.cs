@@ -32,28 +32,31 @@ internal class CommandAddPoint : ICommand
         { "YELLOW",               Color.Yellow }
         };
     private readonly string nameOfPointToAdd;
-    private Color? colorToSet;
-    private Vector2? PositionToAddIn;
+    private readonly Color? color;
+    private readonly Vector2? PositionToAddIn;
+    private readonly int Radius;
 
-    public CommandAddPoint(string nameOfPointToAdd, string? color = null, Vector2? Position = null)
+    public CommandAddPoint(string nameOfPointToAdd, string? color = null, Vector2? Position = null, int Radius = 10)
     {
         this.nameOfPointToAdd = nameOfPointToAdd;
         byte[] randcolor = [0,0,0];
         Random random = new();
         random.NextBytes(randcolor);
-        colorToSet = new(randcolor[0], randcolor[1], randcolor[2]);
-        if (color != null) if (Colors.TryGetValue(color, out Color Color)) colorToSet = Color;
+        this.color = new(randcolor[0], randcolor[1], randcolor[2]);
+        this.Radius = Radius;
+        if (color != null) if (Colors.TryGetValue(color, out Color Color)) this.color = Color;
         if (Position != null) PositionToAddIn = Position;
     }
-    public CommandAddPoint(string nameOfPointToAdd, Color color, Vector2? Position = null)
+    public CommandAddPoint(string nameOfPointToAdd, Color color, Vector2? Position = null, int Radius = 10)
     {
         this.nameOfPointToAdd = nameOfPointToAdd;
-        this.colorToSet = color;
+        this.color = color;
+        this.Radius = Radius;
         if (Position != null) PositionToAddIn = Position;
     }
     public void Execute(State State)
     {
-            State.Graph.AddToPoints(new(nameOfPointToAdd, PositionToAddIn, colorToSet));
+            State.Graph.AddToPoints(new(nameOfPointToAdd, Radius, PositionToAddIn, color));
     }
     public void Undo(State State)
     {

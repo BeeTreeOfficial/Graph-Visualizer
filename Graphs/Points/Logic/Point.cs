@@ -11,15 +11,16 @@ public partial class Point : IPoint
 
     public Dictionary<string, Edge> ConnectedEdges = [];
     public Vector2 Position { get; private set; }
-    public Point(string name, Vector2? Position = null, Color? ColorToUse = null)
+    public Point(string name, int Radius, Vector2? Position = null, Color? ColorToUse = null)
     {
         if (ColorToUse != null) color = ColorToUse.Value;
         if (Position != null) this.Position = Position.Value;
+        this.Radius = Radius;
         Name = name;
     }
     public void Shuffle()
     {
-        Random random = new Random();
+        Random random = new();
         Position = new(random.Next(1000), random.Next(1000));
     }
     public void Update()

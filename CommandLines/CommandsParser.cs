@@ -28,13 +28,17 @@ internal class CommandsParser
         }
         else if (commands.Contains("ADD"))
         {
+            int randomInteger = new Random().Next(5, 15);
             switch (commands.Length)
             {
                 case 2:
-                    State.CommandDeque.Execute(new CommandAddPoint(commands[1], null, State.Camera.Body.Target), State);
+                    State.CommandDeque.Execute(new CommandAddPoint(commands[1], null, State.Camera.Body.Target, randomInteger), State);
                     break;
                 case 3:
-                    State.CommandDeque.Execute(new CommandAddPoint(commands[1], commands[2], State.Camera.Body.Target), State);
+                    State.CommandDeque.Execute(new CommandAddPoint(commands[1], commands[2], State.Camera.Body.Target, randomInteger), State);
+                    break;
+                case 4:
+                    State.CommandDeque.Execute(new CommandAddPoint(commands[1], commands[2], State.Camera.Body.Target, Convert.ToInt32(commands[3])), State);
                     break;
                 default:
                     break;

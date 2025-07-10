@@ -5,12 +5,12 @@ namespace DijkstraAlgorithm.Mathematics
 {
     public class BellFord
     {
-        private Graph graph;
-        private Result Sheet = new();
+        private readonly Graph graph;
+        private readonly Result Sheet = new();
         public BellFord(Graph graph, string Name)
         {
             this.graph = graph;
-            for (int i = 0; i < this.graph.points.Count; i++)
+            for (int i = 0; i < this.graph.Points.Count; i++)
             {
                 Sheet.Body.Add(this.graph.Points.ElementAt(i).Value.Name, new(double.PositiveInfinity, null));
             }
@@ -21,7 +21,7 @@ namespace DijkstraAlgorithm.Mathematics
         {
             for (int i = 0; i < Sheet.Body.Count - 1; i++)
             {
-                foreach (var point in graph.points.Values)
+                foreach (var point in graph.Points.Values)
                 {
                     foreach (var edge in point.ConnectedEdges)
                     {
